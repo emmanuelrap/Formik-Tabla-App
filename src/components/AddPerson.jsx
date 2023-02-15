@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-export const AddUser = () => {
+export const AddPerson = () => {
   let navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -46,7 +46,7 @@ export const AddUser = () => {
   });
   return (
     <div>
-      <h2>Add User</h2>
+      <h2>Add Person</h2>
       <Formik
         initialValues={{
           name: "",
@@ -124,4 +124,4 @@ export const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default AddPerson;
