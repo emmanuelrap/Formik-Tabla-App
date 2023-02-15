@@ -5,93 +5,26 @@ import { Button } from "@mui/material";
 
 export const Persons = () => {
   const navigate = useNavigate();
-  const [persons, setPersons] = useState([]);
-  const [users, setUsers] = useState([]);
-
-  //Crear un objeto recipiente para el match (join)
-  var objectTable = new Object();
-
-  var personas = [
-    {
-      nombre: "pedro",
-      apellidos: "gomez",
-      edad: 20,
-    },
-    {
-      nombre: "ana",
-      apellidos: "sanchez",
-      edad: 30,
-    },
-  ];
-
-  var libros = [
-    {
-      titulo: "introduccion a java",
-      paginas: 300,
-      persona_nombre: "pedro",
-    },
-    {
-      titulo: "programacion net",
-      paginas: 300,
-      persona_nombre: "ana",
-    },
-  ];
+  const [users, setUser] = useState([]);
 
   useEffect(() => {
-    loadPersons();
     loadUsers();
   }, []);
 
-  const loadPersons = async () => {
-    const result = await axios.get(
-      `http://ccnayt.dnsalias.com:9095/api/v1/persons/`
+  //ZAM:Pendiente de revisar
+  const deleteUser = async (id) => {
+    await axios.delete(
+      `https://60decafeabbdd9001722d05c.mockapi.io/users/${id}`
     );
-    setPersons(result.data);
-    // console.log(">setPersons", result.data);
+    loadUsers();
   };
 
   const loadUsers = async () => {
     const result = await axios.get(
-      `http://ccnayt.dnsalias.com:9095/api/v1/users/`
+      `https://60decafeabbdd9001722d05c.mockapi.io/users`
     );
-    setUsers(result.data);
-    // console.log(">setUsers", result.data);
+    setUser(result.data);
   };
-
-  //Crea un nuevo objeto con las propiedades que necesito de ambos en donde coincida "IdPersonaOK"
-  const matchPersonsUsers = async () => {
-    console.log(">>>>PERSONAS desde MATCH:", persons[0]);
-
-    var resultado = users.map(function (user) {
-      var otraPersona = persons.filter(function (p) {
-        return p.IdPersonaOK === user.IdPersonaOK;
-      })[0];
-
-      try {
-        return {
-          // nombre: otraPersona.nombre,
-          // titulo: user.titulo,
-          // paginas: user.paginas,
-          // apellidos: otraPersona.apellidos,
-          nombre: otraPersona.Nombre,
-          usuario: user.Usuario,
-        };
-      } catch (e) {
-        console.log(e);
-      }
-    });
-    objectTable = resultado;
-    console.log(">>>>>RESULTADO:", resultado);
-    console.log(">>>>>OBJECT:", objectTable);
-  };
-
-  function ejecutarFuncion() {
-    console.log("ejecutar funcion");
-    console.log(objectTable);
-  }
-
-  //CODIGO ---------------------------------
-  matchPersonsUsers();
 
   return (
     <div className="home-page">
@@ -105,35 +38,31 @@ export const Persons = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody onLoad={ejecutarFuncion()}>
-          {objectTable.map((element) => (
+        <tbody>
+          {users.map((user, index) => (
             <tr>
-              {/* <th scope="row">{element.id}</th> */}
-              {/* <td>{element.nombre}</td>
-              <td>{element.usuario}</td> */}
-              <h2>{element.usuario}</h2>
-              <td>
-                {/* {element.direcciones.gmail.DesDirWeb +
-                  ": " +
-                  element.direcciones.gmail.DireccionWeb} */}
-              </td>
+              <th scope="row">{index + 1}</th>
+              <td>{user.name}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
               <Button
                 variant="contained"
-                onClick={() => history.push(`/person/${person.id}`)}
+                onClick={() => history.push(`/user/${user.id}`)}
               >
                 View
               </Button>
+              {/* <Link class="btn btn-outline-primary mr-2" to={`./edituser/${user.id}`}>Edit</Link> */}
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => history.push(`/edituser/${person.id}`)}
+                onClick={() => history.push(`/edituser/${user.id}`)}
               >
                 Edit
               </Button>
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => deleteUser(person.id)}
+                onClick={() => deleteUser(user.id)}
               >
                 Delete
               </Button>
