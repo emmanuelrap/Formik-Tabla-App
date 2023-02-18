@@ -11,6 +11,37 @@ const PersonsUsers = () => {
   var objectUsers = new Object();
 
 
+  var personas = [
+    {
+      nombre: "Carlos",
+      apellidos: "Zambrano",
+      edad: 25,
+    },
+    {
+      nombre: "Ana",
+      apellidos: "Villarreal",
+      edad: 30,
+    },
+  ];
+
+  var libros = [
+    {
+      titulo: "introduccion a java",
+      paginas: 300,
+      autor: "Carlos",
+    },
+    {
+      titulo: "programacion net",
+      paginas: 200,
+      autor: "Ana",
+    },
+    {
+      titulo: "React FULL",
+      paginas: 200,
+      autor: "Carlos",
+    },
+  ];
+
   useEffect(() => {
     loadData();
   }, []);
@@ -26,76 +57,50 @@ const PersonsUsers = () => {
 
     ///////////////////////
     let users=resultUsers.data;
-    let persons = resultPersons.data;
+    let personas = resultPersons.data;
 
-    console.log("persons.data:",persons)
+                  //ARRAYS
+    console.log("personas.data:",personas)
     console.log("users.data:",users)
 
-
-
-    // setMyTable(persons)
+    //  setMyTable(persons)
 
   
     ///////////MATCH [ERROR AQUI] ///////////
-    var resultadoMatch = users.map(function(user) {
-      var otraPersona = persons.filter(function(p) {
-        return p.IdPersonaOK == user.IdPersonaOK;
-      })[0];
-      console.log("otraPersona",otraPersona)
+    var resultado = users.map(function(user) {
+      var otraPersona = personas.filter(function(p) {
+         return p.IdPersonaPK == "2";
+      
+      })[0];                      
       return {
-        nombre: user.Usuario,
-        usuario: otraPersona.Nombre
+        nombre: otraPersona.Nombre,
+        usuario: user.Usuario
       }
-
     });
-    
-    
- 
-     console.log("resultado Match",resultadoMatch);
-      setMyTable(resultadoMatch)
+     console.log("resultado Match",resultado);
+      setMyTable(resultado)
+
+
+
+
 
   };
 
   return (
-    <div className="home-page">
+    <div>
       <table className="table">
-        <thead className="thead-dark">
+        <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">User Name</th>
-            <th scope="col">Email Id</th>
-            <th>Action</th>
+            <th scope="col">USUARIO</th>
+            <th scope="col">NOMBRE</th>
           </tr>
         </thead>
         <tbody>
-          {myTable.map((element, index) => (
+          {myTable.map((element) => (
             <tr>
-              <th scope="row">{index + 1}</th>
               <td>{element.nombre} </td>
               <td>{element.usuario} </td>
-              
-              
-              {/* <Button
-                variant="contained"
-                onClick={() => history.push(`/user/${user.id}`)}
-              >
-                View
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => history.push(`/edituser/${user.id}`)}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => deleteUser(user.id)}
-              >
-                Delete
-              </Button> */}
+            
             </tr>
           ))}
         </tbody>
