@@ -1,4 +1,4 @@
-import MyTabs from "./subcomponents/MyTabs";
+import MyTabs from "./MyTabs";
 
 const Telephones = () => {
   return (

@@ -1,9 +1,10 @@
 import React from "react";
+import TableUsers from "../components/tables/TableUsers";
 
 const Users = () => {
   return (
     <div>
-      <h2>USERS</h2>
+      <TableUsers></TableUsers>
     </div>
   );
 };
