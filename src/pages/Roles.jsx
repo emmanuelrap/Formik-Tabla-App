@@ -1,8 +1,9 @@
 import React from 'react'
+import TableRoles from '../components/tables/TableRoles'
 
 const Roles = () => {
   return (
-    <div>Roles</div>
+    <div><TableRoles/></div>
   )
 }
 
