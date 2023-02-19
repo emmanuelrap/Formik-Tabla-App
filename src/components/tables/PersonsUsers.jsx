@@ -4,44 +4,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const PersonsUsers = () => {
-  const navigate = useNavigate();
-  //users: tipo Objeto
-  const [users, setUser] = useState([]);
-  const [myTable, setMyTable] = useState([]);
-  var objectUsers = new Object();
+  const [usuariosConNombre, setUsuarioConNombre] = useState([]);
+  let users; 
+  let personas;
 
 
-  var personas = [
-    {
-      nombre: "Carlos",
-      apellidos: "Zambrano",
-      edad: 25,
-    },
-    {
-      nombre: "Ana",
-      apellidos: "Villarreal",
-      edad: 30,
-    },
-  ];
-
-  var libros = [
-    {
-      titulo: "introduccion a java",
-      paginas: 300,
-      autor: "Carlos",
-    },
-    {
-      titulo: "programacion net",
-      paginas: 200,
-      autor: "Ana",
-    },
-    {
-      titulo: "React FULL",
-      paginas: 200,
-      autor: "Carlos",
-    },
-  ];
-
+ 
   useEffect(() => {
     loadData();
   }, []);
@@ -55,34 +23,27 @@ const PersonsUsers = () => {
       `http://ccnayt.dnsalias.com:9095/api/v1/persons/`
     );
 
-    ///////////////////////
-    let users=resultUsers.data;
-    let personas = resultPersons.data;
+    //////////
+     users=resultUsers.data;
+     personas = resultPersons.data;
+    //  console.log("resultPersons.data",resultPersons.data)
+    //  console.log("resultUsers.data",resultUsers.data)
+    ////////
 
-                  //ARRAYS
-    console.log("personas.data:",personas)
-    console.log("users.data:",users)
-
-    //  setMyTable(persons)
-
-  
-    ///////////MATCH [ERROR AQUI] ///////////
-    var resultado = users.map(function(user) {
-      var otraPersona = personas.filter(function(p) {
-         return p.IdPersonaPK == "2";
-      
-      })[0];                      
-      return {
-        nombre: otraPersona.Nombre,
-        usuario: user.Usuario
+    const nombresPorId = {}
+    console.log("personas",personas)
+    personas.forEach(p => nombresPorId[p.IdPersonaOK] = p.Nombre)
+    const usuariosConNombres = users.map(u => {
+      const nuevo = {
+          ...u, // Todo lo que tenía el auto
+          Nombre: nombresPorId[u.IdUsuarioOK]
       }
-    });
-     console.log("resultado Match",resultado);
-      setMyTable(resultado)
-
-
-
-
+      // Borrar idMarca en el nuevo.
+      delete nuevo.IdUsuarioOK
+      return nuevo
+  })
+  console.log("usuariosConNombres",usuariosConNombres)
+  setUsuarioConNombre(usuariosConNombres)
 
   };
 
@@ -96,10 +57,11 @@ const PersonsUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {myTable.map((element) => (
+          {usuariosConNombre.map((element) => (
             <tr>
-              <td>{element.nombre} </td>
-              <td>{element.usuario} </td>
+              <td>{element.Usuario} </td>
+              <td>{element.Nombre} </td>
+             
             
             </tr>
           ))}
