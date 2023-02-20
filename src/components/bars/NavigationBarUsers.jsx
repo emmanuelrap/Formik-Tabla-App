@@ -7,8 +7,10 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 
-const MyTabs = () => {
+const NavigationBarUsers = () => {
   const [valueTab, setValueTab] = useState(0);
 
   const handleChange = (event, newValueTab) => {
@@ -17,13 +19,13 @@ const MyTabs = () => {
 
     switch (newValueTab) {
       case 0:
-        navigate("/persons");
+        navigate("/users");
         break;
       case 1:
-        navigate("/telephones");
+        navigate("/table");
         break;
       case 2:
-        navigate("/adduser");
+        navigate("/tabletelephones");
         break;
       case 3:
         navigate("/adduser");
@@ -44,11 +46,11 @@ const MyTabs = () => {
         aria-label="icon tabs example"
       >
         <Tab icon={<Diversity3Icon />} />
-        <Tab icon={<PhoneIcon />} />
-        <Tab icon={<PersonAddIcon />} />
+        <Tab icon={<AlternateEmailIcon />} />
+        <Tab icon={<ContactPhoneIcon />} />
       </Tabs>
     </div>
   );
 };
 
-export default MyTabs;
+export default NavigationBarUsers;

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
-const TableUsers = () => {
+const TableUsersCopia = () => {
   const navigate = useNavigate();
   //users: tipo Objecto
   const [users, setUser] = useState([]);
@@ -41,6 +41,9 @@ const TableUsers = () => {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Usuario</th>
+            <th scope="col">Roles-IdNegocioBK [¿Actual?]]</th>
+
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +51,35 @@ const TableUsers = () => {
             <tr>
               <th scope="row">{index + 1}</th>
               <td>{myUser.Usuario} </td>
+              <td>
+                {myUser.cat_usuarios_roles.map((rol) => (
+                  <li>
+                    {rol.IdNegocioBK}[{rol.Actual}]
+                  </li>
+                ))}
+              </td>
+              <td></td>
+
+              {/* <Button
+                variant="contained"
+                onClick={() => history.push(`/user/${user.id}`)}
+              >
+                View
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => history.push(`/edituser/${user.id}`)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => deleteUser(user.id)}
+              >
+                Delete
+              </Button> */}
             </tr>
           ))}
         </tbody>
@@ -56,4 +88,4 @@ const TableUsers = () => {
   );
 };
 
-export default TableUsers;
+export default TableUsersCopia;

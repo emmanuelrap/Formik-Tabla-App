@@ -1,10 +1,14 @@
-import React from 'react'
-import TableRoles from '../components/tables/TableRoles'
+import React from "react";
+import NavigationBarRoles from "../components/bars/NavigationBarRoles";
+import TableRoles from "../components/tables/TableRoles";
 
 const Roles = () => {
   return (
-    <div><TableRoles/></div>
-  )
-}
+    <div>
+      <NavigationBarRoles />
+      <TableRoles />
+    </div>
+  );
+};
 
-export default Roles
+export default Roles;

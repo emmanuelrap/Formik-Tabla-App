@@ -1,3 +1,5 @@
+# DEPENDENCIAS
+
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/material @mui/styled-engine-sc styled-components
 npm install @fontsource/roboto
@@ -10,8 +12,7 @@ npm install axios mongoose
 
 # ###### ERRORES
 
-# UseHistory
-
+UseHistory:
 npm run dev
 En el ruteo v6 cambia, ahora es UseNavigate y la const por convencion es Navigate
 
@@ -22,25 +23,20 @@ En el ruteo v6 cambia, ahora es UseNavigate y la const por convencion es Navigat
     3. Ejecuta matchPersonsUsers que crea un objeto para llenar los       campos de la tabla con el match de los ID de personas y usuarios
     4. Retorna una tabla con el mapeo de este objeto
 
-
-
-
-
-
 /////////////// DATA /////////////////
-    var personas = [
-      {
-        nombre: "Carlos",
-        apellidos: "Zambrano",
-        edad: 25,
-      },
-      {
-        nombre: "Ana",
-        apellidos: "Villarreal",
-        edad: 30,
-      },
-    ];
-  
+var personas = [
+{
+nombre: "Carlos",
+apellidos: "Zambrano",
+edad: 25,
+},
+{
+nombre: "Ana",
+apellidos: "Villarreal",
+edad: 30,
+},
+];
+
     var libros = [
       {
         titulo: "introduccion a java",
@@ -58,16 +54,16 @@ En el ruteo v6 cambia, ahora es UseNavigate y la const por convencion es Navigat
         autor: "Carlos",
       },
     ];
-   
-   /////////////MOSTRAR DATA ////////////////////
+
+/////////////MOSTRAR DATA ////////////////////
 
     var resultado = libros.map(function(libro) {
- 
+
             var otraPersona = personas.filter(function(p) {
-           
+
               return p.nombre == libro.autor;
             })[0];
-           
+
             return {
               nombre: otraPersona.nombre,
               titulo: libro.titulo,
@@ -75,7 +71,7 @@ En el ruteo v6 cambia, ahora es UseNavigate y la const por convencion es Navigat
               apellidos: otraPersona.apellidos
             }
           });
-           
+
         //   console.log(resultado);
           objectTable = resultado;
 

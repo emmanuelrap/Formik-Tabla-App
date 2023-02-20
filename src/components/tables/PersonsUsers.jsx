@@ -5,18 +5,15 @@ import { Button } from "@mui/material";
 
 const PersonsUsers = () => {
   const [usuariosConNombre, setUsuarioConNombre] = useState([]);
-  let users; 
+  let users;
   let personas;
 
-
- 
   useEffect(() => {
     loadData();
   }, []);
 
-
   const loadData = async () => {
-    const resultUsers = await axios.get(
+    const resultUsers = await axios.post(
       `http://ccnayt.dnsalias.com:9095/api/v1/users/`
     );
     const resultPersons = await axios.get(
@@ -24,27 +21,26 @@ const PersonsUsers = () => {
     );
 
     //////////
-     users=resultUsers.data;
-     personas = resultPersons.data;
+    users = resultUsers.data;
+    personas = resultPersons.data;
     //  console.log("resultPersons.data",resultPersons.data)
     //  console.log("resultUsers.data",resultUsers.data)
     ////////
 
-    const nombresPorId = {}
-    console.log("personas",personas)
-    personas.forEach(p => nombresPorId[p.IdPersonaOK] = p.Nombre)
-    const usuariosConNombres = users.map(u => {
+    const nombresPorId = {};
+    console.log("personas", personas);
+    personas.forEach((p) => (nombresPorId[p.IdPersonaOK] = p.Nombre));
+    const usuariosConNombres = users.map((u) => {
       const nuevo = {
-          ...u, // Todo lo que tenía el auto
-          Nombre: nombresPorId[u.IdUsuarioOK]
-      }
+        ...u, // Todo lo que tenía el auto
+        Nombre: nombresPorId[u.IdUsuarioOK],
+      };
       // Borrar idMarca en el nuevo.
-      delete nuevo.IdUsuarioOK
-      return nuevo
-  })
-  console.log("usuariosConNombres",usuariosConNombres)
-  setUsuarioConNombre(usuariosConNombres)
-
+      delete nuevo.IdUsuarioOK;
+      return nuevo;
+    });
+    console.log("usuariosConNombres", usuariosConNombres);
+    setUsuarioConNombre(usuariosConNombres);
   };
 
   return (
@@ -61,8 +57,6 @@ const PersonsUsers = () => {
             <tr>
               <td>{element.Usuario} </td>
               <td>{element.Nombre} </td>
-             
-            
             </tr>
           ))}
         </tbody>

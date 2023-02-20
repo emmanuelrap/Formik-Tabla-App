@@ -1,4 +1,4 @@
-import MyTabs from "./MyTabs";
+import TableButtons from "./TableButtons";
 
 const Telephones = () => {
   return (
