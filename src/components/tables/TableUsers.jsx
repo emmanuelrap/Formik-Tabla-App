@@ -2,8 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import Box from "@mui/material/Box";
+
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import InboxIcon from "@mui/icons-material/Inbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const TableUsers = () => {
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
+
   const navigate = useNavigate();
   //users: tipo Objecto
   const [users, setUser] = useState([]);
@@ -35,23 +50,36 @@ const TableUsers = () => {
   };
 
   return (
-    <div className="home-page">
-      <table className="table table-striped">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Usuario</th>
-          </tr>
-        </thead>
-        <tbody>
+    // ZAM: PONER LA ALTURA ACORDE A LA PANTALLA
+    <div className="border border-primary rounded m-2 p-2">
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 300,
+          bgcolor: "background.paper",
+          position: "relative",
+          overflow: "auto",
+          maxHeight: 500,
+        }}
+      >
+        <div className="text-center font-weight-bold">
+          <h3>USUARIOS</h3>
+        </div>
+
+        <List component="nav" aria-label="main mailbox folders">
           {myUsers.map((myUser, index) => (
-            <tr>
-              <th scope="row">{index + 1}</th>
-              <td>{myUser.Usuario} </td>
-            </tr>
+            <ListItemButton
+              selected={selectedIndex === index}
+              onClick={(event) => handleListItemClick(event, index)}
+            >
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={myUser.Usuario} />
+            </ListItemButton>
           ))}
-        </tbody>
-      </table>
+        </List>
+      </Box>
     </div>
   );
 };

@@ -11,7 +11,11 @@ const Users = () => {
 
       <div className="horizontalComponents ml-1">
         <TableUsers />
-        <TableTelephones />
+        <div className="border border-primary rounded m-2 p-2">
+          {" "}
+          <h2 className="bg-info text-center rounded">TELEFONOS de FIBARRAC</h2>
+          <TableTelephones />
+        </div>
       </div>
     </div>
   );

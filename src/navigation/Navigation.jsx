@@ -1,4 +1,3 @@
-import { SwipeableDrawer } from "@mui/material";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,9 +18,13 @@ import NavigationBarUsers from "../components/bars/NavigationBarUsers";
 import NavigationBarRoles from "../components/bars/NavigationBarRoles";
 import TableTelephones from "../components/tables/TableTelephones";
 
+import MyAppBar from "../components/bars/MyAppBar";
+
 const Navigation = () => {
   return (
     <div>
+      <MyAppBar />
+
       <Router>
         <nav>
           <ul>

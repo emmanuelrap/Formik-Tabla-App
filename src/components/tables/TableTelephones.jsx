@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import ActionTableBar from "../bars/ActionTableBar";
 
 const TableTelephones = () => {
   const [telephones, setTelephon] = useState([]);
@@ -18,6 +19,7 @@ const TableTelephones = () => {
   };
   return (
     <div className="home-page">
+      <ActionTableBar></ActionTableBar>
       <table className="table table-striped">
         <thead class="thead-dark">
           <tr>

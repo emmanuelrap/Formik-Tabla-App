@@ -3,7 +3,9 @@
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/material @mui/styled-engine-sc styled-components
 npm install @fontsource/roboto
+
 npm install @mui/icons-material
+npm i @material-ui/core
 
 npm i bootstrap
 npm i --save bootstrap @popperjs/core
@@ -15,6 +17,11 @@ npm install axios mongoose
 UseHistory:
 npm run dev
 En el ruteo v6 cambia, ahora es UseNavigate y la const por convencion es Navigate
+
+UI-Material:
+[si] import { green } from "@mui/material/colors";
+[si] @mui/icons-material/Adb
+[no] import { green } from '@material-ui/core/colors';
 
 # HOME
 
