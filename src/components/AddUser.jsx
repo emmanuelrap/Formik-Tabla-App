@@ -68,7 +68,7 @@ export const AddUser = () => {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Enter Your Name"
+                    placeholder="Nombre"
                     name="name"
                     value={name}
                     onChange={(e) => onInputChange(e)}
@@ -78,7 +78,7 @@ export const AddUser = () => {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Enter Your Username"
+                    placeholder="Apelldio Paterno"
                     name="username"
                     value={username}
                     onChange={(e) => onInputChange(e)}
@@ -88,7 +88,7 @@ export const AddUser = () => {
                   <input
                     type="email"
                     className="form-control form-control-lg"
-                    placeholder="Enter Your E-mail Address"
+                    placeholder="Apellido Materno"
                     name="email"
                     value={email}
                     onChange={(e) => onInputChange(e)}
@@ -98,7 +98,7 @@ export const AddUser = () => {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Enter Your Phone Number"
+                    placeholder="Correo"
                     name="phone"
                     value={phone}
                     onChange={(e) => onInputChange(e)}
@@ -108,7 +108,7 @@ export const AddUser = () => {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Enter Your Website Name"
+                    placeholder="Telefono Movil"
                     name="website"
                     value={website}
                     onChange={(e) => onInputChange(e)}

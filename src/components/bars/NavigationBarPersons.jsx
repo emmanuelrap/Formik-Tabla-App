@@ -1,11 +1,11 @@
 import React from "react";
 
-const NavigationBarRoles = () => {
+const NavigationBarPersons = () => {
   return (
     <div className="bg-info text-center rounded ">
-      <h2>NavigationBarRoles</h2>
+      <h2>NavigationBarPersons</h2>
     </div>
   );
 };
 
-export default NavigationBarRoles;
+export default NavigationBarPersons;

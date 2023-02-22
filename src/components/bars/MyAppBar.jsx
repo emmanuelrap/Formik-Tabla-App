@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,8 +11,14 @@ import InputBase from "@mui/material/InputBase";
 import AdbIcon from "@mui/icons-material/Adb";
 import Diversity1Icon from "@mui/icons-material/Diversity1";
 import SearchIcon from "@mui/icons-material/Search";
+import Persons from "../../pages/Persons";
+import Users from "../../pages/Users";
+import Roles from "../../pages/Roles";
+import { Home } from "@mui/icons-material";
 
-const pages = ["Personas", "Usuarios", "Roles"];
+import { Link, useNavigate } from "react-router-dom";
+
+const pages = ["PERSONAS", "USUARIOS", "ROLES", "PRUEBAS"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -55,7 +62,38 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 const MyAppBar = () => {
+  const [myPags, setMyPags] = useState("");
+  // const [pagina, setPagina] = useState("HOME");
+  const navigate = useNavigate();
+
+  function handleClickNav(e) {
+    e.preventDefault();
+    setMyPags(e.target.innerText);
+  }
+
+  useEffect(() => {
+    console.log(myPags);
+    switch (myPags) {
+      case "HOME":
+        navigate("/");
+        break;
+      case "PERSONAS":
+        navigate("/persons");
+        break;
+      case "ROLES":
+        navigate("/roles");
+        break;
+      case "USUARIOS":
+        navigate("/users");
+        break;
+      case "PRUEBAS":
+        navigate("/pruebas");
+        break;
+    }
+  }, [myPags]);
+
   return (
     <div>
       <AppBar position="static">
@@ -85,7 +123,7 @@ const MyAppBar = () => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  // onClick={handleCloseNavMenu}
+                  onClick={handleClickNav}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}

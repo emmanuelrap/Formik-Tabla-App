@@ -5,13 +5,13 @@ import { Button } from "@mui/material";
 import Users from "../components/tables/TableUsers";
 import TablePersons from "../components/tables/TablePersons";
 import PersonsUsers from "../components/tables/PersonsUsers";
+import NavigationBarPersons from "../components/bars/NavigationBarPersons";
 
 export const Persons = () => {
-
-
   return (
     <div className="home-page">
-     <TablePersons/>
+      <NavigationBarPersons></NavigationBarPersons>
+      <TablePersons />
     </div>
   );
 };
