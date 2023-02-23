@@ -114,7 +114,12 @@ export const AddUser = () => {
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>
-                <button className="btn btn-primary btn-block">Add User</button>
+                <div>
+                  <br />
+                  <button className="btn btn-primary btn-block">
+                    Agregar Usuario
+                  </button>
+                </div>
               </form>
             </div>
           </div>
