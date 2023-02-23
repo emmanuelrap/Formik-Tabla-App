@@ -22,7 +22,7 @@ import TableTelephones from "../components/tables/TableTelephones";
 
 import MyAppBar from "../components/bars/MyAppBar";
 import TableUsers2 from "../components/tables/TableUsers2";
-import SignInSide from "../../pruebas/SignInSide";
+import ButtonGrupExample from "../../UI-MATERIAL/ButtonGrupExample";
 var pagina = "HOME";
 
 const Navigation = () => {
@@ -41,7 +41,10 @@ const Navigation = () => {
           <Route path="/telephones" element={<Telephones />} />
           <Route path="/" element={<Home />} />
 
-          <Route path="/pruebas" element={<SignInSide></SignInSide>} />
+          <Route
+            path="/pruebas"
+            element={<ButtonGrupExample></ButtonGrupExample>}
+          />
         </Routes>
       </Router>
     </div>
