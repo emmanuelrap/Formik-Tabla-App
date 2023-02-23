@@ -7,6 +7,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
+import ButtonGroupTable from "../ButtonGroupTable";
+
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -56,30 +58,7 @@ const ActionTableBar = () => {
 
   return (
     <div className="horizontalComponents ml-1">
-      <Button
-        className=""
-        variant="contained"
-        color="primary"
-        startIcon={<AddCircleIcon />}
-      >
-        Nuevo
-      </Button>
-      <Button
-        className="mx-1"
-        variant="contained"
-        color="warning"
-        startIcon={<EditIcon />}
-      >
-        Modificar
-      </Button>
-      <Button
-        className=""
-        variant="contained"
-        color="error"
-        startIcon={<DeleteIcon />}
-      >
-        Eliminar
-      </Button>
+      <ButtonGroupTable></ButtonGroupTable>
       <Search>
         <SearchIconWrapper>
           <SearchIcon />

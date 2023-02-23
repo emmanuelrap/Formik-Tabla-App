@@ -21,7 +21,6 @@ import NavigationBarRoles from "../components/bars/NavigationBarRoles";
 import TableTelephones from "../components/tables/TableTelephones";
 
 import MyAppBar from "../components/bars/MyAppBar";
-import TableUsers2 from "../components/tables/TableUsers2";
 import ButtonGrupExample from "../../UI-MATERIAL/ButtonGrupExample";
 var pagina = "HOME";
 
