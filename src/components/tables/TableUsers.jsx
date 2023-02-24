@@ -1,87 +1,132 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import { Button } from "@mui/material";
-import Box from "@mui/material/Box";
 
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  Paper,
+  TablePagination,
+} from "@mui/material";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
-const TableUsers = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
+import { styled } from "@mui/material/styles";
 
-  const navigate = useNavigate();
-  //users: tipo Objecto
+const columns = [
+  { id: "Usuario", label: "USUARIO", maxWidth: 100 },
+  { id: "IdPersonaPK", label: "ID PERSONA", minWidth: 100 },
+  { id: "IdUsuarioOK", label: "ID USUARIO", minWidth: 100 },
+  { id: "Expira", label: "¿EXPIRA?", minWidth: 100 },
+];
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.white,
+    // backgroundColor: "#3D85D2 !important",
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+const TableUser = ({ userSelect, setUserSelect }) => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
   const [users, setUser] = useState([]);
-  const [myUsers, setMyUser] = useState([]);
-  var objectUsers = new Object();
-  var objectMyUsers = new Object();
 
   useEffect(() => {
     loadUsers();
-    loadMyUsers();
   }, []);
-
   const loadUsers = async () => {
-    const result = await axios.get(
-      `https://60decafeabbdd9001722d05c.mockapi.io/users`
-    );
-    setUser(result.data);
-    objectUsers = result.data;
-    console.log("objectUsers:", result.data);
-  };
-
-  const loadMyUsers = async () => {
     const result2 = await axios.get(
       `http://ccnayt.dnsalias.com:9095/api/v1/users/`
     );
-    setMyUser(result2.data);
-    objectMyUsers = result2.data;
+    setUser(result2.data);
     console.log("objectMyUsers:", result2.data);
   };
 
-  return (
-    // TODO: ZAM: PONER LA ALTURA ACORDE A LA PANTALLA
-    <div className="border border-primary rounded m-2 p-2">
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: 300,
-          bgcolor: "background.paper",
-          position: "relative",
-          overflow: "auto",
-          maxHeight: 500,
-        }}
-      >
-        <div className="text-center font-weight-bold">
-          <h3>USUARIOS</h3>
-        </div>
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-        <List component="nav" aria-label="main mailbox folders">
-          {myUsers.map((myUser, index) => (
-            <ListItemButton
-              selected={selectedIndex === index}
-              onClick={(event) => handleListItemClick(event, index)}
-            >
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary={myUser.Usuario} />
-            </ListItemButton>
-          ))}
-        </List>
-      </Box>
-    </div>
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const handleClickRow = (event) => {
+    console.log("Distte clic", event);
+  };
+
+  console.log(">>users", users);
+  return (
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: 400, minWidth: window.innerWidth - 10 }}>
+        <Table stickyHeader size="small" aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <StyledTableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((user) => {
+                return (
+                  <StyledTableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={user.idPersonaOK}
+                    onClick={handleClickRow}
+                  >
+                    {columns.map((column) => {
+                      const value = user[column.id];
+                      return (
+                        <StyledTableCell key={column.id} align={column.align}>
+                          {value}
+                        </StyledTableCell>
+                      );
+                    })}
+                  </StyledTableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={users.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 };
 
-export default TableUsers;
+export default TableUser;

@@ -16,24 +16,6 @@ const NavigationBarUsers = ({ tables, setTable }) => {
   const handleChange = (event, newValue) => {
     console.log(newValue);
     setTable(newValue);
-
-    // switch (newValueTab) {
-    //   case 0:
-    //     navigate("/users");
-    //     break;
-    //   case 1:
-    //     navigate("/table");
-    //     break;
-    //   case 2:
-    //     navigate("/tabletelephones");
-    //     break;
-    //   case 3:
-    //     navigate("/adduser");
-    //     break;
-
-    //   default:
-    //     return <h1>No project match</h1>;
-    // }
   };
 
   const navigate = useNavigate();
@@ -48,6 +30,11 @@ const NavigationBarUsers = ({ tables, setTable }) => {
         <Tab icon={<Diversity3Icon />} />
         <Tab icon={<AlternateEmailIcon />} />
         <Tab icon={<ContactPhoneIcon />} />
+        <Tab label="Estatus" />
+        <Tab label="Claves" />
+        <Tab label="Roles" />
+        <Tab label="Procesos" />
+        <Tab label="Domicilios" />
       </Tabs>
     </div>
   );
