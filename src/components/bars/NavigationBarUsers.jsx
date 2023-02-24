@@ -10,38 +10,38 @@ import Diversity3Icon from "@mui/icons-material/Diversity3";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 
-const NavigationBarUsers = () => {
-  const [valueTab, setValueTab] = useState(0);
+const NavigationBarUsers = ({ tables, setTable }) => {
+  // const [tables, setTable] = useState(0);
 
-  const handleChange = (event, newValueTab) => {
-    console.log(newValueTab);
-    setValueTab(newValueTab);
+  const handleChange = (event, newValue) => {
+    console.log(newValue);
+    setTable(newValue);
 
-    switch (newValueTab) {
-      case 0:
-        navigate("/users");
-        break;
-      case 1:
-        navigate("/table");
-        break;
-      case 2:
-        navigate("/tabletelephones");
-        break;
-      case 3:
-        navigate("/adduser");
-        break;
+    // switch (newValueTab) {
+    //   case 0:
+    //     navigate("/users");
+    //     break;
+    //   case 1:
+    //     navigate("/table");
+    //     break;
+    //   case 2:
+    //     navigate("/tabletelephones");
+    //     break;
+    //   case 3:
+    //     navigate("/adduser");
+    //     break;
 
-      default:
-        return <h1>No project match</h1>;
-    }
+    //   default:
+    //     return <h1>No project match</h1>;
+    // }
   };
 
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="border border-primary rounded m-1">
       <Tabs
-        value={valueTab}
+        value={tables}
         onChange={handleChange}
         aria-label="icon tabs example"
       >

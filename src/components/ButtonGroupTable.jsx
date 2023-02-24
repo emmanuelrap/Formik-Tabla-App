@@ -9,6 +9,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 const ButtonGroupTable = () => {
   const [alignment, setAlignment] = useState();
@@ -16,31 +18,28 @@ const ButtonGroupTable = () => {
     setAlignment(newAlignment);
   };
   return (
-    <ToggleButtonGroup
-      color="primary"
-      value={alignment}
-      exclusive
-      onChange={handleChange}
-      aria-label="Platform"
-    >
-      {/* <ToggleButton value="back">
-        <ArrowBackIcon />
-      </ToggleButton> */}
-      <ToggleButton value="agregar" color="success">
-        <Button>
+    <div className="border border-primary rounded m-1 ">
+      <Tooltip title="Agregar">
+        <IconButton>
           <AddCircleIcon />
-        </Button>
-      </ToggleButton>
-      <ToggleButton value="detalle">
-        <InfoIcon />
-      </ToggleButton>
-      <ToggleButton value="editar">
-        <EditIcon />
-      </ToggleButton>
-      <ToggleButton value="eliminar" color="error">
-        <DeleteIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Consultar">
+        <IconButton>
+          <InfoIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Editar">
+        <IconButton>
+          <EditIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Eliminar">
+        <IconButton>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
+    </div>
   );
 };
 

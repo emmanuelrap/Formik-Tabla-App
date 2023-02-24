@@ -13,7 +13,7 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const TableUsers = () => {
+const ListUsers = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -84,4 +84,4 @@ const TableUsers = () => {
   );
 };
 
-export default TableUsers;
+export default ListUsers;

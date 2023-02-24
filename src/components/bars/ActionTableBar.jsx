@@ -57,7 +57,7 @@ const ActionTableBar = () => {
   }));
 
   return (
-    <div className="horizontalComponents ml-1">
+    <div className="horizontalComponents     ml-1 border border-primary rounded m-1">
       <ButtonGroupTable></ButtonGroupTable>
       <Search>
         <SearchIconWrapper>

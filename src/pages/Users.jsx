@@ -1,3 +1,4 @@
+//ZAM: PAgina principal de usuarios, tiene un toogle para activar y desactivar la lista de usuarios rapida, tiene un renderizado condicional para las tablas del <NavigationBarUsers>
 import React, { useState } from "react";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
 import TableTelephones from "../components/tables/TableTelephones";
@@ -6,25 +7,36 @@ import "../styles.css";
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
 import ToggleButton from "@mui/material/ToggleButton";
 import "../styles.css";
+import TablePersons from "../components/tables/TablePersons";
+import TableRoles from "../components/tables/TableRoles";
+import ListUsers from "../components/tables/ListUsers";
 
 const Users = () => {
   const [showMenu, setShowMenu] = useState(true);
+  const [tables, setTable] = useState(0);
+
+  const handleChangeMenu = (event, newValue) => {
+    newValue = !newValue;
+    console.log(newValue);
+    setShowMenu(newValue);
+  };
 
   return (
-    <div>
+    <div className="ml-1">
       <div className="horizontalComponents">
-        <ToggleButton value="lista">
-          <ViewHeadlineIcon />
+        <ToggleButton value={showMenu} onChange={handleChangeMenu}>
+          <ViewHeadlineIcon color="" />
         </ToggleButton>
-        <NavigationBarUsers />
+        <NavigationBarUsers tables={tables} setTable={setTable} />
       </div>
 
       <div className="horizontalComponents ml-1">
-        {showMenu == true ? <TableUsers></TableUsers> : null}
-        <div className="border border-primary rounded m-2 p-2">
-          {" "}
-          <h2 className="bg-info text-center rounded">TELEFONOS de FIBARRAC</h2>
-          <TableTelephones />
+        {showMenu == true ? <ListUsers></ListUsers> : null}
+        <div className="border border-primary rounded m-1">
+          {tables == 0 ? <TableUsers></TableUsers> : null}
+          {tables == 1 ? <TableTelephones></TableTelephones> : null}
+          {tables == 2 ? <TablePersons></TablePersons> : null}
+          {/* <TableTelephones /> */}
         </div>
       </div>
     </div>
