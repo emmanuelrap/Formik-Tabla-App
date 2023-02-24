@@ -1,12 +1,12 @@
 //ZAM: PAgina principal de usuarios, tiene un toogle para activar y desactivar la lista de usuarios rapida, tiene un renderizado condicional para las tablas del <NavigationBarUsers>
 import React, { useState } from "react";
+import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
+import ToggleButton from "@mui/material/ToggleButton";
+
+import "../styles.css";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
 import TableTelephones from "../components/tables/TableTelephones";
 import TableUsers from "../components/tables/TableUsers";
-import "../styles.css";
-import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
-import ToggleButton from "@mui/material/ToggleButton";
-import "../styles.css";
 import TablePersons from "../components/tables/TablePersons";
 import TableRoles from "../components/tables/TableRoles";
 import ListUsers from "../components/tables/ListUsers";

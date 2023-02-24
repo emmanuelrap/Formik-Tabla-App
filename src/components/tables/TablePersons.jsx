@@ -4,47 +4,41 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const TablePersons = () => {
+  //users: tipo Objecto
+  const [persons, setPerson] = useState([]);
+  var objectUsers = new Object();
 
-    //users: tipo Objecto
-    const [persons, setPerson] = useState([]);
-    var objectUsers = new Object();
-  
-  
-    useEffect(() => {
-      loadPersons();
-   
-    }, []);
-  
-    const loadPersons = async () => {
-      const result = await axios.get(
-        `http://ccnayt.dnsalias.com:9095/api/v1/persons/`
-      );
-      setPerson(result.data);
-      objectUsers=result.data;
-  
-    };
-  
-   
-  
-    return (
-      <div className="home-page">
-        <table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">User Name</th>
-              <th scope="col">Email Id</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {persons.map((p, index) => (
-              <tr key={p._id}>
-                <th scope="row">{index + 1}</th>
-                <td>{p.Nombre} </td>
-                
-                {/* <Button
+  useEffect(() => {
+    loadPersons();
+  }, []);
+
+  const loadPersons = async () => {
+    const result = await axios.get(
+      `http://ccnayt.dnsalias.com:9095/api/v1/persons/`
+    );
+    setPerson(result.data);
+    objectUsers = result.data;
+  };
+
+  return (
+    <div className="home-page">
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Email Id</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {persons.map((p, index) => (
+            <tr key={p._id}>
+              <th scope="row">{index + 1}</th>
+              <td>{p.Nombre} </td>
+
+              {/* <Button
                   variant="contained"
                   onClick={() => history.push(`/user/${user.id}`)}
                 >
@@ -64,12 +58,12 @@ const TablePersons = () => {
                 >
                   Delete
                 </Button> */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-  )
-}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-export default TablePersons
+export default TablePersons;

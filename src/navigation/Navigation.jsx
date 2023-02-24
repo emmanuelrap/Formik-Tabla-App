@@ -19,10 +19,10 @@ import PersonsUsers from "../components/tables/PersonsUsers";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
 import NavigationBarRoles from "../components/bars/NavigationBarRoles";
 import TableTelephones from "../components/tables/TableTelephones";
-
 import MyAppBar from "../components/bars/MyAppBar";
-import ButtonGrupExample from "../../UI-MATERIAL/ButtonGrupExample";
-var pagina = "HOME";
+import TableUsers from "../components/tables/TableUsers";
+import TableMaterial from "../../pruebas/TableMaterial";
+import TableUserTest from "../../pruebas/TableUserTest";
 
 const Navigation = () => {
   return (
@@ -40,10 +40,7 @@ const Navigation = () => {
           <Route path="/telephones" element={<Telephones />} />
           <Route path="/" element={<Home />} />
 
-          <Route
-            path="/pruebas"
-            element={<ButtonGrupExample></ButtonGrupExample>}
-          />
+          <Route path="/pruebas" element={<TableUserTest />} />
         </Routes>
       </Router>
     </div>
