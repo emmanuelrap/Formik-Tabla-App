@@ -36,7 +36,6 @@ const ListUsers = ({ userSel, setUserSel }) => {
       `https://60decafeabbdd9001722d05c.mockapi.io/users`
     );
     setUser(result.data);
-    objectUsers = result.data;
     console.log("objectUsers:", result.data);
   };
 
@@ -45,8 +44,6 @@ const ListUsers = ({ userSel, setUserSel }) => {
       `http://ccnayt.dnsalias.com:9095/api/v1/users/`
     );
     setMyUser(result2.data);
-    objectMyUsers = result2.data;
-    console.log("objectMyUsers:", result2.data);
   };
 
   return (

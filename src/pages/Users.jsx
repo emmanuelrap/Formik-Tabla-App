@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
 import ToggleButton from "@mui/material/ToggleButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton, Tooltip } from "@mui/material";
 
 import "../styles.css";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
@@ -10,15 +12,21 @@ import TableUsers from "../components/tables/TableUsers";
 import TablePersons from "../components/tables/TablePersons";
 import TableRoles from "../components/tables/TableRoles";
 import ListUsers from "../components/tables/ListUsers";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Users = () => {
   const [showMenu, setShowMenu] = useState(true);
-  const [tables, setTable] = useState(0);
-  const [userSel, setUserSel] = useState("YO");
+  const [showTable, setShowTable] = useState(0);
+  const [userSel, setUserSel] = useState("");
 
   const handleChangeMenu = (event, newValue) => {
     newValue = !newValue;
     setShowMenu(newValue);
+  };
+
+  const handleClickQuitarUsuario = () => {
+    setUserSel("");
+    setShowTable(0);
   };
 
   return (
@@ -27,9 +35,22 @@ const Users = () => {
         <ToggleButton value={showMenu} onChange={handleChangeMenu}>
           <ViewHeadlineIcon color="" />
         </ToggleButton>
-        <NavigationBarUsers tables={tables} setTable={setTable} />
-        <h3>
-          Seleccionado: <b>{userSel}</b>
+        <NavigationBarUsers
+          showTable={showTable}
+          setShowTable={setShowTable}
+          userSel={userSel}
+          setUserSel={setUserSel}
+        />
+        <h3 className="p-0 m-2">
+          {userSel == "" ? (
+            ""
+          ) : (
+            <>
+              <IconButton onClick={handleClickQuitarUsuario}>
+                {userSel} <DeleteIcon />
+              </IconButton>
+            </>
+          )}
         </h3>
       </div>
 
@@ -38,11 +59,11 @@ const Users = () => {
           <ListUsers userSel={userSel} setUserSel={setUserSel}></ListUsers>
         ) : null}
         <div className="border border-primary rounded m-1">
-          {tables == 0 ? (
+          {showTable == 0 ? (
             <TableUsers userSel={userSel} setUserSel={setUserSel}></TableUsers>
           ) : null}
-          {tables == 1 ? <TableTelephones></TableTelephones> : null}
-          {tables == 2 ? <TablePersons></TablePersons> : null}
+          {showTable == 1 ? <TableTelephones></TableTelephones> : null}
+          {showTable == 2 ? <TablePersons></TablePersons> : null}
           {/* <TableTelephones /> */}
         </div>
       </div>

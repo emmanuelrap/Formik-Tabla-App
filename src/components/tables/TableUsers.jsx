@@ -75,9 +75,7 @@ const TableUser = ({ userSel, setUserSel }) => {
   console.log(">>users", users);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer
-        sx={{ maxHeight: 400, minWidth: window.innerWidth - 150 }}
-      >
+      <TableContainer sx={{ maxHeight: 400, minWidth: 1000 }}>
         <Table stickyHeader size="small" aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -127,6 +125,18 @@ const TableUser = ({ userSel, setUserSel }) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        color=""
+        sx={{
+          ".MuiTablePagination-displayedRows": {
+            color: "red",
+          },
+          ".MuiTablePagination-selectLabel": {
+            color: "green",
+          },
+          ".MuiTablePagination-select": {
+            color: "red",
+          },
+        }}
       />
     </Paper>
   );
