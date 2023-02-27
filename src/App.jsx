@@ -28,8 +28,10 @@ export default function App() {
     setDataUsers(result.data);
     setDataPersons(result2.data);
 
-    let users = result.data;
-    let personas = result2.data;
+    console.log("result desde loadData", result);
+
+    let users = await result.data;
+    let personas = await result2.data;
 
     const nombresPorId = {};
     personas.forEach((p) => (nombresPorId[p.IdPersonaOK] = p.Nombre));
@@ -43,11 +45,18 @@ export default function App() {
       delete nuevo.IdUsuarioOK;
       return nuevo;
     });
+
+    console.log("usuariosConNombres", usuariosConNombres);
+    setDataUsersPersons(usuariosConNombres);
   };
 
   return (
     <div>
-      <Navigation dataUsers={dataUsers} dataPersons={dataPersons} />
+      <Navigation
+        dataUsers={dataUsers}
+        dataPersons={dataPersons}
+        dataUsersPersons={dataUsersPersons}
+      />
     </div>
   );
 }

@@ -15,7 +15,7 @@ import ListUsers from "../components/tables/ListUsers";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableDirecciones from "../components/tables/TableDirecciones";
 
-const Users = ({ dataUsers, dataPersons }) => {
+const Users = ({ dataUsers, dataPersons, dataUsersPersons }) => {
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
@@ -61,7 +61,11 @@ const Users = ({ dataUsers, dataPersons }) => {
         ) : null}
         <div className="border border-primary rounded m-1">
           {showTable == 0 ? (
-            <TableUsers userSel={userSel} setUserSel={setUserSel}></TableUsers>
+            <TableUsers
+              userSel={userSel}
+              setUserSel={setUserSel}
+              dataUsersPersons={dataUsersPersons}
+            ></TableUsers>
           ) : null}
           {showTable == 1 ? <TableDirecciones></TableDirecciones> : null}
           {showTable == 2 ? <TablePersons></TablePersons> : null}

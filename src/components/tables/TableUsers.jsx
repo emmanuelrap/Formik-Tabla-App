@@ -16,6 +16,7 @@ import { styled } from "@mui/material/styles";
 
 const columns = [
   { id: "Usuario", label: "USUARIO", maxWidth: 100 },
+  { id: "Nombre", label: "USUARIO", maxWidth: 100 },
   { id: "IdPersonaPK", label: "ID PERSONA", minWidth: 100 },
   { id: "IdUsuarioOK", label: "ID USUARIO", minWidth: 100 },
   { id: "Expira", label: "¿EXPIRA?", minWidth: 100 },
@@ -42,7 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableUser = ({ userSel, setUserSel }) => {
+const TableUser = ({ userSel, setUserSel, dataUsersPersons }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [users, setUser] = useState([]);
@@ -70,7 +71,7 @@ const TableUser = ({ userSel, setUserSel }) => {
     setUserSel(nombreUsuario);
   };
 
-  console.log(">>users desde TableUsers:", users);
+  console.log(">> desde TableUsers:", dataUsersPersons);
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -90,7 +91,7 @@ const TableUser = ({ userSel, setUserSel }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users
+            {dataUsersPersons
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((user) => {
                 return (
