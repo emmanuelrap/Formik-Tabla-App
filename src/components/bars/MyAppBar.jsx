@@ -74,7 +74,6 @@ const MyAppBar = () => {
   }
 
   useEffect(() => {
-    console.log(myPags);
     switch (myPags) {
       case "HOME":
         navigate("/");

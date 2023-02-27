@@ -54,7 +54,6 @@ const TableUser = () => {
       `http://ccnayt.dnsalias.com:9095/api/v1/users/`
     );
     setUser(result2.data);
-    console.log("objectMyUsers:", result2.data);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -66,7 +65,6 @@ const TableUser = () => {
     setPage(0);
   };
 
-  console.log(">>users", users);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>

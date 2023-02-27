@@ -23,7 +23,6 @@ const ListUsers = ({ userSel, setUserSel }) => {
   const handleListItemClick = (event, index, nombreUsuario) => {
     setSelectedIndex(index);
     setUserSel(nombreUsuario);
-    console.log(nombreUsuario);
   };
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const ListUsers = ({ userSel, setUserSel }) => {
       `https://60decafeabbdd9001722d05c.mockapi.io/users`
     );
     setUser(result.data);
-    console.log("objectUsers:", result.data);
   };
 
   const loadMyUsers = async () => {

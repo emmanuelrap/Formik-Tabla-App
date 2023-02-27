@@ -13,8 +13,9 @@ import TablePersons from "../components/tables/TablePersons";
 import TableRoles from "../components/tables/TableRoles";
 import ListUsers from "../components/tables/ListUsers";
 import DeleteIcon from "@mui/icons-material/Delete";
+import TableDirecciones from "../components/tables/TableDirecciones";
 
-const Users = () => {
+const Users = ({ dataUsers, dataPersons }) => {
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
@@ -41,7 +42,7 @@ const Users = () => {
           userSel={userSel}
           setUserSel={setUserSel}
         />
-        <h3 className="p-0 m-2">
+        <h3 className="p-0 mt-1">
           {userSel == "" ? (
             ""
           ) : (
@@ -62,8 +63,19 @@ const Users = () => {
           {showTable == 0 ? (
             <TableUsers userSel={userSel} setUserSel={setUserSel}></TableUsers>
           ) : null}
-          {showTable == 1 ? <TableTelephones></TableTelephones> : null}
+          {showTable == 1 ? <TableDirecciones></TableDirecciones> : null}
           {showTable == 2 ? <TablePersons></TablePersons> : null}
+          {showTable == 3 ? <TableDirecciones></TableDirecciones> : null}
+          {showTable == 4 ? <TablePersons></TablePersons> : null}
+          {showTable == 5 ? <TableDirecciones></TableDirecciones> : null}
+          {showTable == 6 ? (
+            <TableDirecciones
+              userSel={userSel}
+              setUserSel={setUserSel}
+              dataUsers={dataUsers}
+              dataPersons={dataPersons}
+            ></TableDirecciones>
+          ) : null}
           {/* <TableTelephones /> */}
         </div>
       </div>

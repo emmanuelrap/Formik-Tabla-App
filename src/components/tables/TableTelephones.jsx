@@ -15,7 +15,6 @@ const TableTelephones = () => {
       `http://ccnayt.dnsalias.com:9095/api/v1/persons/`
     );
     setTelephon(result.data[0].cat_personas_telefonos);
-    console.log(" (result.data)", result.data[0]);
   };
   return (
     <div className="home-page">

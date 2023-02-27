@@ -21,7 +21,6 @@ const NavigationBarUsers = ({
   const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setShowTable(newValue);
   };
 
@@ -34,12 +33,12 @@ const NavigationBarUsers = ({
           aria-label="icon tabs example"
         >
           <Tab icon={<Diversity3Icon />} />
-          <Tab icon={"Correos"} disabled={true} />
-          <Tab icon={"Telefonos"} disabled={true} />
           <Tab label="Estatus" disabled={true} />
           <Tab label="Claves" disabled={true} />
           <Tab label="Roles" disabled={true} />
           <Tab label="Procesos" disabled={true} />
+          <Tab icon="Telefonos" disabled={true} />
+          <Tab icon="Correos" disabled={true} />
           <Tab label="Domicilios" disabled={true} />
         </Tabs>
       ) : (
@@ -49,12 +48,12 @@ const NavigationBarUsers = ({
           aria-label="icon tabs example"
         >
           <Tab icon={<Diversity3Icon />} />
-          <Tab icon={"Correos"} />
-          <Tab icon={"Telefonos"} />
           <Tab label="Estatus" />
           <Tab label="Claves" />
           <Tab label="Roles" />
           <Tab label="Procesos" />
+          <Tab icon="Telefonos" />
+          <Tab icon="Correos" />
           <Tab label="Domicilios" />
         </Tabs>
       )}

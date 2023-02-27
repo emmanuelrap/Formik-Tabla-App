@@ -24,7 +24,7 @@ import TableUsers from "../components/tables/TableUsers";
 import TableMaterial from "../../pruebas/TableMaterial";
 import TableUserTest from "../../pruebas/TableUserTest";
 
-const Navigation = () => {
+const Navigation = ({ dataUsers, dataPersons }) => {
   return (
     <div>
       <Router>
@@ -35,7 +35,10 @@ const Navigation = () => {
           <Route path="/persons" element={<Persons />} />
           <Route path="/roles" element={<Roles />} />
           <Route path="/matchpersonsusers" element={<PersonsUsers />} />
-          <Route path="/users" element={<Users />} />
+          <Route
+            path="/users"
+            element={<Users dataUsers={dataUsers} dataPersons={dataPersons} />}
+          />
 
           <Route path="/telephones" element={<Telephones />} />
           <Route path="/" element={<Home />} />

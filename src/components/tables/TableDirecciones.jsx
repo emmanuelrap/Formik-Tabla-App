@@ -16,6 +16,7 @@ import { styled } from "@mui/material/styles";
 
 const columns = [
   { id: "Usuario", label: "USUARIO", maxWidth: 100 },
+  { id: "Nombre", label: "NOMBRE", minWidth: 100 },
   { id: "IdPersonaPK", label: "ID PERSONA", minWidth: 100 },
   { id: "IdUsuarioOK", label: "ID USUARIO", minWidth: 100 },
   { id: "Expira", label: "¿EXPIRA?", minWidth: 100 },
@@ -42,7 +43,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableUser = ({ userSel, setUserSel }) => {
+const TableDirecciones = ({
+  userSel,
+  setUserSel,
+  dataUsers,
+  dataPersons,
+  usuariosConNombres,
+}) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [users, setUser] = useState([]);
@@ -69,8 +76,6 @@ const TableUser = ({ userSel, setUserSel }) => {
   const handleClickRow = (nombreUsuario) => {
     setUserSel(nombreUsuario);
   };
-
-  console.log(">>users desde TableUsers:", users);
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -141,4 +146,4 @@ const TableUser = ({ userSel, setUserSel }) => {
   );
 };
 
-export default TableUser;
+export default TableDirecciones;
