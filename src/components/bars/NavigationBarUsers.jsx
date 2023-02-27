@@ -28,8 +28,8 @@ const NavigationBarUsers = ({ tables, setTable }) => {
         aria-label="icon tabs example"
       >
         <Tab icon={<Diversity3Icon />} />
-        <Tab icon={<AlternateEmailIcon />} />
-        <Tab icon={<ContactPhoneIcon />} />
+        <Tab icon={"Correos"} />
+        <Tab icon={"Telefonos"} />
         <Tab label="Estatus" />
         <Tab label="Claves" />
         <Tab label="Roles" />

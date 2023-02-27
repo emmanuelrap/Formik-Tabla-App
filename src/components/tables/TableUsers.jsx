@@ -42,7 +42,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TableUser = ({ userSelect, setUserSelect }) => {
+const TableUser = ({ userSel, setUserSel }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [users, setUser] = useState([]);
@@ -67,14 +67,17 @@ const TableUser = ({ userSelect, setUserSelect }) => {
     setPage(0);
   };
 
-  const handleClickRow = (event) => {
-    console.log("Distte clic", event);
+  const handleClickRow = (nombreUsuario) => {
+    console.log("Diste clic en:", nombreUsuario);
+    setUserSel(nombreUsuario);
   };
 
   console.log(">>users", users);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 400, minWidth: window.innerWidth - 10 }}>
+      <TableContainer
+        sx={{ maxHeight: 400, minWidth: window.innerWidth - 150 }}
+      >
         <Table stickyHeader size="small" aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -99,7 +102,7 @@ const TableUser = ({ userSelect, setUserSelect }) => {
                     role="checkbox"
                     tabIndex={-1}
                     key={user.idPersonaOK}
-                    onClick={handleClickRow}
+                    onClick={() => handleClickRow(user.Usuario)}
                   >
                     {columns.map((column) => {
                       const value = user[column.id];

@@ -12,9 +12,9 @@ import TableRoles from "../components/tables/TableRoles";
 import ListUsers from "../components/tables/ListUsers";
 
 const Users = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const [tables, setTable] = useState(0);
-  const [userSelec, setUserSelec] = useState("YO");
+  const [userSel, setUserSel] = useState("YO");
 
   const handleChangeMenu = (event, newValue) => {
     newValue = !newValue;
@@ -28,17 +28,18 @@ const Users = () => {
           <ViewHeadlineIcon color="" />
         </ToggleButton>
         <NavigationBarUsers tables={tables} setTable={setTable} />
-        <h3>Usuario Seleccionado: {userSelec}</h3>
+        <h3>
+          Seleccionado: <b>{userSel}</b>
+        </h3>
       </div>
 
       <div className="horizontalComponents ml-1">
-        {showMenu == true ? <ListUsers></ListUsers> : null}
+        {showMenu == true ? (
+          <ListUsers userSel={userSel} setUserSel={setUserSel}></ListUsers>
+        ) : null}
         <div className="border border-primary rounded m-1">
           {tables == 0 ? (
-            <TableUsers
-              userSelec={userSelec}
-              setUserSelec={setUserSelec}
-            ></TableUsers>
+            <TableUsers userSel={userSel} setUserSel={setUserSel}></TableUsers>
           ) : null}
           {tables == 1 ? <TableTelephones></TableTelephones> : null}
           {tables == 2 ? <TablePersons></TablePersons> : null}

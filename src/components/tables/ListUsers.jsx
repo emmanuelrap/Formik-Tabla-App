@@ -13,18 +13,18 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const ListUsers = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
-
+const ListUsers = ({ userSel, setUserSel }) => {
   const navigate = useNavigate();
   //users: tipo Objecto
   const [users, setUser] = useState([]);
   const [myUsers, setMyUser] = useState([]);
-  var objectUsers = new Object();
-  var objectMyUsers = new Object();
+  const [selectedIndex, setSelectedIndex] = useState([]);
+
+  const handleListItemClick = (event, index, nombreUsuario) => {
+    setSelectedIndex(index);
+    setUserSel(nombreUsuario);
+    console.log(nombreUsuario);
+  };
 
   useEffect(() => {
     loadUsers();
@@ -59,7 +59,7 @@ const ListUsers = () => {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          maxHeight: 500,
+          maxHeight: 400,
         }}
       >
         <div className="text-center font-weight-bold">
@@ -70,7 +70,9 @@ const ListUsers = () => {
           {myUsers.map((myUser, index) => (
             <ListItemButton
               selected={selectedIndex === index}
-              onClick={(event) => handleListItemClick(event, index)}
+              onClick={(event) =>
+                handleListItemClick(event, index, myUser.Usuario)
+              }
             >
               <ListItemIcon>
                 <AccountCircleIcon />
