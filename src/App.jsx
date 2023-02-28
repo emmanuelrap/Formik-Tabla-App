@@ -46,8 +46,10 @@ export default function App() {
       return nuevo;
     });
 
-    console.log("usuariosConNombres", usuariosConNombres);
+    //console.log("usuariosConNombres", usuariosConNombres);
     setDataUsersPersons(usuariosConNombres);
+    usuariosConNombres.map((user, index) => (user.id = index));
+    console.log("usuariosConNombres MAP;", usuariosConNombres);
   };
 
   return (

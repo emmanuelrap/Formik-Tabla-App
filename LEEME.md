@@ -12,6 +12,8 @@ npm i --save bootstrap @popperjs/core
 
 npm install axios mongoose
 
+npm i material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
+
 # ###### ERRORES
 
 UseHistory:

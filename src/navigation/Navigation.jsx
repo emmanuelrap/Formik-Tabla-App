@@ -21,11 +21,10 @@ import NavigationBarRoles from "../components/bars/NavigationBarRoles";
 import TableTelephones from "../components/tables/TableTelephones";
 import MyAppBar from "../components/bars/MyAppBar";
 import TableUsers from "../components/tables/TableUsers";
-import TableMaterial from "../../pruebas/TableMaterial";
-import TableUserTest from "../../pruebas/TableUserTest";
+import TableMaterial from "../../UI-MATERIAL/TableMaterial";
+import ReactTableFilter from "../../UI-MATERIAL/ReactTableFilter";
 
 const Navigation = ({ dataUsers, dataPersons, dataUsersPersons }) => {
-  console.log("Desde NAVIGATION:", dataUsersPersons);
   return (
     <div>
       <Router>
@@ -50,7 +49,10 @@ const Navigation = ({ dataUsers, dataPersons, dataUsersPersons }) => {
           <Route path="/telephones" element={<Telephones />} />
           <Route path="/" element={<Home />} />
 
-          <Route path="/pruebas" element={<TableUserTest />} />
+          <Route
+            path="/pruebas"
+            element={<ReactTableFilter dataUsersPersons={dataUsersPersons} />}
+          />
         </Routes>
       </Router>
     </div>

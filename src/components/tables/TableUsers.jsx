@@ -13,6 +13,7 @@ import {
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
 import { styled } from "@mui/material/styles";
+import ActionTableBar from "../bars/ActionTableBar";
 
 const columns = [
   { id: "Usuario", label: "USUARIO", maxWidth: 100 },
@@ -75,6 +76,7 @@ const TableUser = ({ userSel, setUserSel, dataUsersPersons }) => {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <ActionTableBar />
       <TableContainer sx={{ maxHeight: 400, minWidth: 800 }}>
         <Table stickyHeader size="small" aria-label="sticky table">
           <TableHead>
