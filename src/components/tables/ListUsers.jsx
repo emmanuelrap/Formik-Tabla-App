@@ -8,12 +8,10 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const ListUsers = ({ userSel, setUserSel }) => {
+const ListUsers = ({ userSel, setUserSel, dataCombinacion }) => {
+  console.log("desde ListUser ", dataCombinacion);
   const navigate = useNavigate();
   //users: tipo Objecto
   const [users, setUser] = useState([]);
@@ -54,7 +52,7 @@ const ListUsers = ({ userSel, setUserSel }) => {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          maxHeight: 400,
+          maxHeight: 450,
         }}
       >
         <div className="text-center font-weight-bold">
@@ -62,17 +60,18 @@ const ListUsers = ({ userSel, setUserSel }) => {
         </div>
 
         <List component="nav" aria-label="main mailbox folders">
-          {myUsers.map((myUser, index) => (
+          {dataCombinacion.map((user, index) => (
             <ListItemButton
               selected={selectedIndex === index}
+              // index={dataCombinacion.IdPersonaOK}
               onClick={(event) =>
-                handleListItemClick(event, index, myUser.Usuario)
+                handleListItemClick(event, index, user.Usuario)
               }
             >
               <ListItemIcon>
                 <AccountCircleIcon />
+                {user.Usuario}
               </ListItemIcon>
-              <ListItemText primary={myUser.Usuario} />
             </ListItemButton>
           ))}
         </List>

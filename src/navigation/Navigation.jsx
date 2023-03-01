@@ -5,7 +5,6 @@ import {
   NavLink,
   Link,
 } from "react-router-dom";
-
 import { useState } from "react";
 
 import Home from "../pages/Home";
@@ -14,17 +13,13 @@ import Roles from "../pages/Roles";
 import AddUser from "../components/AddUser";
 import Persons from "../pages/Persons";
 import Telephones from "../components/Telephones";
-import TableButtons from "../components/TableButtons";
 import PersonsUsers from "../components/tables/PersonsUsers";
-import NavigationBarUsers from "../components/bars/NavigationBarUsers";
-import NavigationBarRoles from "../components/bars/NavigationBarRoles";
-import TableTelephones from "../components/tables/TableTelephones";
 import MyAppBar from "../components/bars/MyAppBar";
-import TableUsers from "../components/tables/TableUsers";
-import TableMaterial from "../../UI-MATERIAL/TableMaterial";
+import ReactTableFilterCustom from "../../UI-MATERIAL/ReactTableFilterCustom";
 import ReactTableFilter from "../../UI-MATERIAL/ReactTableFilter";
 
-const Navigation = ({ dataUsers, dataPersons, dataUsersPersons }) => {
+const Navigation = ({ dataCombinacion }) => {
+  console.log("desde navegation:", dataCombinacion);
   return (
     <div>
       <Router>
@@ -37,13 +32,7 @@ const Navigation = ({ dataUsers, dataPersons, dataUsersPersons }) => {
           <Route path="/matchpersonsusers" element={<PersonsUsers />} />
           <Route
             path="/users"
-            element={
-              <Users
-                dataUsers={dataUsers}
-                dataPersons={dataPersons}
-                dataUsersPersons={dataUsersPersons}
-              />
-            }
+            element={<Users dataCombinacion={dataCombinacion} />}
           />
 
           <Route path="/telephones" element={<Telephones />} />
@@ -51,7 +40,9 @@ const Navigation = ({ dataUsers, dataPersons, dataUsersPersons }) => {
 
           <Route
             path="/pruebas"
-            element={<ReactTableFilter dataUsersPersons={dataUsersPersons} />}
+            element={
+              <ReactTableFilterCustom dataCombinacion={dataCombinacion} />
+            }
           />
         </Routes>
       </Router>

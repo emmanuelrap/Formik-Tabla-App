@@ -1,20 +1,14 @@
 //Aqui se carga la data y se manda mediante props a todos los demas Componentes
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./navigation/Navigation";
 
-import Persons from "./pages/Persons";
-import Roles from "./pages/Roles";
-import Users from "./pages/Users";
-
 export default function App() {
-  const [dataUsers, setDataUsers] = useState([]);
-  const [dataPersons, setDataPersons] = useState([]);
-  const [dataUsersPersons, setDataUsersPersons] = useState([]);
+  const [dataCombinacion, setDataCombinacion] = useState([]);
 
   useEffect(() => {
-    loadData().then("Termine de cargar la data");
+    console.log("useEFect");
+    loadData();
   }, []);
 
   const loadData = async () => {
@@ -25,40 +19,49 @@ export default function App() {
     const result2 = await axios.get(
       `http://ccnayt.dnsalias.com:9095/api/v1/persons/`
     );
-    setDataUsers(result.data);
-    setDataPersons(result2.data);
 
-    console.log("result desde loadData", result);
+    var users = await result.data;
+    var personas = await result2.data;
 
-    let users = await result.data;
-    let personas = await result2.data;
+    /////////////////////////////////////////////
 
-    const nombresPorId = {};
-    personas.forEach((p) => (nombresPorId[p.IdPersonaOK] = p.Nombre));
+    // const nuevoUsuario = users.map((u) => {
+    //   const nuevo = {
+    //     ...u, // Todo lo que tenía el usuario mas lo siguiente de persona:
+    //   };
+    //   // Borrar IdUsuarioOK en el nuevo.
+    //   delete nuevo.detail_row;
+    //   delete nuevo._id;
+    //   delete nuevo.cat_usuarios_roles_archivos;
+    //   delete nuevo.cat_usuarios_roles;
+    //   delete nuevo.cat_usuarios_estatus;
+    //   return nuevo;
+    // });
 
-    const usuariosConNombres = users.map((u) => {
-      const nuevo = {
-        ...u, // Todo lo que tenía el usuario mas lo siguiente de persona:
-        Nombre: nombresPorId[u.IdUsuarioOK],
-      };
-      // Borrar IdUsuarioOK en el nuevo.
-      delete nuevo.IdUsuarioOK;
-      return nuevo;
+    await personas.forEach((el) => {
+      try {
+        const index = users
+          .map((e) => e.IdPersonaOK === el.IdPersonaOK)
+          .indexOf(true); // Obtener el índice del elemento para reemplazarlo
+        Object.keys(el).forEach((entry) => {
+          users[index][entry] = el[entry];
+        });
+      } catch (e) {
+        console.log("cache un error");
+      }
     });
 
-    //console.log("usuariosConNombres", usuariosConNombres);
-    setDataUsersPersons(usuariosConNombres);
-    usuariosConNombres.map((user, index) => (user.id = index));
-    console.log("usuariosConNombres MAP;", usuariosConNombres);
+    //Agregar un id Consecutivo
+    await users.map((u, index) => {
+      u.idConsecutivo = index;
+    });
+    console.log("objeto Combinado con ID:", users);
+    setDataCombinacion(users);
   };
 
   return (
     <div>
-      <Navigation
-        dataUsers={dataUsers}
-        dataPersons={dataPersons}
-        dataUsersPersons={dataUsersPersons}
-      />
+      <Navigation dataCombinacion={dataCombinacion} />
     </div>
   );
 }

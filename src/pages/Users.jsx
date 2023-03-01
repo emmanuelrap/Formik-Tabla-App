@@ -14,8 +14,10 @@ import TableRoles from "../components/tables/TableRoles";
 import ListUsers from "../components/tables/ListUsers";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableDirecciones from "../components/tables/TableDirecciones";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const Users = ({ dataUsers, dataPersons, dataUsersPersons }) => {
+const Users = ({ dataCombinacion }) => {
+  console.log("desde USERS:", dataCombinacion);
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
@@ -31,7 +33,7 @@ const Users = ({ dataUsers, dataPersons, dataUsersPersons }) => {
   };
 
   return (
-    <div className="ml-1">
+    <div className="ml-1 ">
       <div className="horizontalComponents">
         <ToggleButton value={showMenu} onChange={handleChangeMenu}>
           <ViewHeadlineIcon color="" />
@@ -48,7 +50,7 @@ const Users = ({ dataUsers, dataPersons, dataUsersPersons }) => {
           ) : (
             <>
               <IconButton onClick={handleClickQuitarUsuario}>
-                {userSel} <DeleteIcon />
+                <AccountCircleIcon /> {userSel}
               </IconButton>
             </>
           )}
@@ -57,14 +59,18 @@ const Users = ({ dataUsers, dataPersons, dataUsersPersons }) => {
 
       <div className="horizontalComponents ml-1">
         {showMenu == true ? (
-          <ListUsers userSel={userSel} setUserSel={setUserSel}></ListUsers>
+          <ListUsers
+            userSel={userSel}
+            setUserSel={setUserSel}
+            dataCombinacion={dataCombinacion}
+          ></ListUsers>
         ) : null}
         <div className="border border-primary rounded m-1">
           {showTable == 0 ? (
             <TableUsers
               userSel={userSel}
               setUserSel={setUserSel}
-              dataUsersPersons={dataUsersPersons}
+              dataCombinacion={dataCombinacion}
             ></TableUsers>
           ) : null}
           {showTable == 1 ? <TableDirecciones></TableDirecciones> : null}
