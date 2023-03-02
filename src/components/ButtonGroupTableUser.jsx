@@ -93,7 +93,7 @@ const ButtonGroupTableUser = ({ userSel, setOpenModalAddUser }) => {
           }}
         >
           <Tooltip title="Agregar">
-            <IconButton>
+            <IconButton onClick={handleClickAddUser}>
               <AddCircleIcon />
             </IconButton>
           </Tooltip>

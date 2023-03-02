@@ -111,42 +111,49 @@ const Users = ({ dataCombinacion }) => {
             <TableEstatus
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableEstatus>
           ) : null}
           {showTable == 2 ? (
             <TableRoles
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableRoles>
           ) : null}
           {showTable == 3 ? (
             <TableRoles
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableRoles>
           ) : null}
           {showTable == 4 ? (
             <TableProcesos
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableProcesos>
           ) : null}
           {showTable == 5 ? (
             <TableTelefonos
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableTelefonos>
           ) : null}
           {showTable == 6 ? (
             <TableDirecciones
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableDirecciones>
           ) : null}
           {showTable == 7 ? (
             <TableDomicilios
               dataCombinacion={dataCombinacion}
               idSeleccionado={idSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableDomicilios>
           ) : null}
           {openModalAddUser == true ? <AddUsuario></AddUsuario> : null}

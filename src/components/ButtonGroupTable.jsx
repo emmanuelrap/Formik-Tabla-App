@@ -10,10 +10,13 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 
-const ButtonGroupTable = ({ userSel }) => {
+const ButtonGroupTable = ({ userSel, setOpenModalAddUser }) => {
   const [alignment, setAlignment] = useState();
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
+  };
+  const handleClickAddUser = (event) => {
+    setOpenModalAddUser(true);
   };
   console.log("userSel", userSel);
   return (
@@ -36,7 +39,7 @@ const ButtonGroupTable = ({ userSel }) => {
         }}
       >
         <Tooltip title="Agregar">
-          <IconButton>
+          <IconButton onClick={handleClickAddUser}>
             <AddCircleIcon />
           </IconButton>
         </Tooltip>

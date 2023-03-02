@@ -5,7 +5,11 @@ import { darken } from "@mui/material";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import ButtonGroupTable from "../ButtonGroupTable";
 
-const TableTelefonos = ({ dataCombinacion, idSeleccionado }) => {
+const TableTelefonos = ({
+  dataCombinacion,
+  idSeleccionado,
+  setOpenModalAddUser,
+}) => {
   let data = dataCombinacion[idSeleccionado].cat_personas_telefonos;
 
   //   const [isLoadData, setIsLoadData] = useState(true);
@@ -60,7 +64,9 @@ const TableTelefonos = ({ dataCombinacion, idSeleccionado }) => {
         }}
         // enableRowSelection
         positionToolbarAlertBanner="bottom" //show selected rows count on bottom toolbar
-        renderTopToolbarCustomActions={({ table }) => <ButtonGroupTable />}
+        renderTopToolbarCustomActions={({ table }) => (
+          <ButtonGroupTable setOpenModalAddUser={setOpenModalAddUser} />
+        )}
         muiTableBodyProps={{
           sx: (theme) => ({
             "& tr:nth-of-type(odd)": {
