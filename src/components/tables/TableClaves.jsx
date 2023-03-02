@@ -6,101 +6,81 @@ import MaterialReactTable, {
 import { darken } from "@mui/material";
 
 import { MRT_Localization_ES } from "material-react-table/locales/es";
-import { Box, Button, IconButton } from "@mui/material";
-import PrintIcon from "@mui/icons-material/Print";
 import ButtonGroupTable from "../ButtonGroupTable";
-import ButtonGroupTableUser from "../ButtonGroupTableUser";
 
-const TableUsers = ({
-  dataCombinacion,
-  setUserSel,
-  userSel,
-  setIdSeleccionado,
-  setOpenModalAddUser,
-}) => {
+const TableClaves = ({ dataCombinacion, idSeleccionado }) => {
+  let data = dataCombinacion[idSeleccionado].cat_usuarios_estatus;
   console.log("data combinacion desde dataCombinacion: ", dataCombinacion);
-  const [isLoadData, setIsLoadData] = useState(true);
-  let data;
+  //   const [isLoadData, setIsLoadData] = useState(true);
+  //   let data;
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoadData(false);
-    }, 800);
-  }, [data]); // <- add empty brackets here
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       setIsLoadData(false);
+  //     }, 800);
+  //   }, [data]); // <- add empty brackets here
 
   const columns = useMemo(
     //column definitions...
     () => [
       {
-        header: "IMAGEN",
+        accessorKey: "IdTipoGenEstatusOK",
+        header: "ID ESTATUS",
         size: 50, //small column
       },
       {
-        accessorKey: "IdUsuarioOK",
-        header: "ID",
+        accessorKey: "TipoEstatus",
+        header: "TIPO",
         size: 50, //small column
       },
       {
-        accessorKey: "Nombre",
-        header: "NOMBRE",
+        accessorKey: "detail_row.FechaReg",
+        header: "Fecha de Registro",
+        size: 100, //small column
       },
       {
-        accessorKey: "Usuario",
-        header: "USUARIO",
-      },
-      {
-        accessorKey: "Expira",
-        header: "¿EXPIRA?",
-        size: 50, //small column
+        accessorKey: "detail_row.UsuarioReg",
+        header: "Usuario Reg",
       },
     ],
     []
   );
 
-  data = dataCombinacion;
-
   return (
-    <Box sx={{ border: "gray 2px ", p: "0.5rem" }}>
+    <div className="m-2">
       <MaterialReactTable
         columns={columns}
-        data={dataCombinacion} //fallback to array if data is undefined
-        state={{ isLoading: isLoadData }}
-        initialState={{ density: "compact", showGlobalFilter: true }}
+        data={data}
+        // state={{ isLoading: isLoadData }}
         enableColumnActions={false}
         localization={MRT_Localization_ES}
         enableStickyHeader
         enableStickyFooter
+        initialState={{ density: "compact", showGlobalFilter: true }}
         muiTableContainerProps={{
           sx: { maxHeight: "300px", minHeight: "300px", minWidth: "1000px" },
         }}
         // enableRowSelection
         positionToolbarAlertBanner="bottom" //show selected rows count on bottom toolbar
-        renderTopToolbarCustomActions={({ table }) => (
-          <ButtonGroupTableUser
-            userSel={userSel}
-            setOpenModalAddUser={setOpenModalAddUser}
-          />
-        )}
+        renderTopToolbarCustomActions={({ table }) => <ButtonGroupTable />}
         muiTableBodyProps={{
           sx: (theme) => ({
             "& tr:nth-of-type(odd)": {
-              backgroundColor: darken(theme.palette.background.default, 0.03),
+              backgroundColor: darken(theme.palette.background.default, 0.1),
             },
           }),
         }}
         muiTableBodyRowProps={({ row }) => ({
           onClick: (event) => {
             console.info(event, row.id);
-            setUserSel(dataCombinacion[row.id].Usuario);
-            setIdSeleccionado(row.id);
           },
           sx: {
             cursor: "pointer", //you might want to change the cursor too when adding an onClick
           },
         })}
       />
-    </Box>
+    </div>
   );
 };
 
-export default TableUsers;
+export default TableClaves;

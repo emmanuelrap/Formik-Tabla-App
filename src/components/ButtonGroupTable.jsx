@@ -18,109 +18,45 @@ const ButtonGroupTable = ({ userSel }) => {
   console.log("userSel", userSel);
   return (
     <div className="horizontalComponents p-1">
-      {userSel === "" ? (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: "fit-content",
-            border: (theme) => `1px solid ${theme.palette.divider}`,
-            borderRadius: 1,
-            bgcolor: "background.paper",
-            color: "text.secondary",
-            "& svg": {
-              m: 1.5,
-            },
-            "& hr": {
-              mx: 0.5,
-            },
-          }}
-        >
-          <Tooltip title="Agregar">
-            <IconButton>
-              <AddCircleIcon />
-            </IconButton>
-          </Tooltip>
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tooltip title="Detalles">
-            <IconButton disabled={true}>
-              <InfoIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Editar" disabled={true}>
-            <IconButton>
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Eliminar">
-            <IconButton disabled={true}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tooltip title="Firmar">
-            <IconButton disabled={true}>
-              <AssignmentIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Cambiar Imagen">
-            <IconButton disabled={true}>
-              <AccountBoxIcon />
-            </IconButton>
-          </Tooltip>
-        </Box>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: "fit-content",
-            border: (theme) => `1px solid ${theme.palette.divider}`,
-            borderRadius: 1,
-            bgcolor: "background.paper",
-            color: "text.secondary",
-            "& svg": {
-              m: 1.5,
-            },
-            "& hr": {
-              mx: 0.5,
-            },
-          }}
-        >
-          <Tooltip title="Agregar">
-            <IconButton>
-              <AddCircleIcon />
-            </IconButton>
-          </Tooltip>
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tooltip title="Detalles">
-            <IconButton disabled={false}>
-              <InfoIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Editar" disabled={false}>
-            <IconButton>
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Eliminar">
-            <IconButton disabled={false}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tooltip title="Firmar">
-            <IconButton disabled={false}>
-              <AssignmentIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Cambiar Imagen">
-            <IconButton disabled={false}>
-              <AccountBoxIcon />
-            </IconButton>
-          </Tooltip>
-        </Box>
-      )}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          width: "fit-content",
+          border: (theme) => `1px solid ${theme.palette.divider}`,
+          borderRadius: 1,
+          bgcolor: "background.paper",
+          color: "text.secondary",
+          "& svg": {
+            m: 1.5,
+          },
+          "& hr": {
+            mx: 0.5,
+          },
+        }}
+      >
+        <Tooltip title="Agregar">
+          <IconButton>
+            <AddCircleIcon />
+          </IconButton>
+        </Tooltip>
+        <Divider orientation="vertical" variant="middle" flexItem />
+        <Tooltip title="Detalles">
+          <IconButton>
+            <InfoIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Editar">
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Eliminar">
+          <IconButton>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
     </div>
   );
 };

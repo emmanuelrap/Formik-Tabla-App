@@ -23,6 +23,9 @@ export default function App() {
     var users = await result.data;
     var personas = await result2.data;
 
+    console.log("users ANTES:", users);
+    console.log(" personas ANTES:", personas);
+
     /////////////////////////////////////////////
 
     // const nuevoUsuario = users.map((u) => {

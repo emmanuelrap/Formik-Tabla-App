@@ -5,9 +5,9 @@ import { darken } from "@mui/material";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import ButtonGroupTable from "../ButtonGroupTable";
 
-const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
-  let data = dataCombinacion[idSeleccionado].cat_usuarios_roles;
-
+const TableEstatus = ({ dataCombinacion, idSeleccionado }) => {
+  let data = dataCombinacion[idSeleccionado].cat_usuarios_estatus;
+  console.log("data combinacion desde dataCombinacion: ", dataCombinacion);
   //   const [isLoadData, setIsLoadData] = useState(true);
   //   let data;
 
@@ -21,23 +21,13 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
     //column definitions...
     () => [
       {
-        accessorKey: "IdInstitutoOK",
-        header: "IdInstitutoOK",
+        accessorKey: "IdTipoGenEstatusOK",
+        header: "ID ESTATUS",
         size: 50, //small column
       },
       {
-        accessorKey: "IdNegocioOK",
-        header: "IdNegocioOK",
-        size: 50, //small column
-      },
-      {
-        accessorKey: "IdRolOK",
-        header: "IdNegocioOK",
-        size: 50, //small column
-      },
-      {
-        accessorKey: "Principal",
-        header: "Principal",
+        accessorKey: "TipoEstatus",
+        header: "TIPO",
         size: 50, //small column
       },
       {
@@ -90,4 +80,4 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
   );
 };
 
-export default TableRoles;
+export default TableEstatus;

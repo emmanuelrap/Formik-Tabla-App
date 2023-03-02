@@ -2,12 +2,19 @@
 import React, { useState } from "react";
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
 import ToggleButton from "@mui/material/ToggleButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip, TextField } from "@mui/material";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Paper from "@mui/material/Paper";
+import Draggable from "react-draggable";
 
 import "../styles.css";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
-import TableTelephones from "../components/tables/TableTelephones";
 import TableUsers from "../components/tables/TableUsers";
 import TablePersons from "../components/tables/TablePersons";
 import TableRoles from "../components/tables/TableRoles";
@@ -15,12 +22,20 @@ import ListUsers from "../components/tables/ListUsers";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableDirecciones from "../components/tables/TableDirecciones";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import TableEstatus from "../components/tables/TableEstatus";
+import TableProcesos from "../components/tables/TableProcesos";
+import TableTelefonos from "../components/tables/TableTelefonos";
+import TableDomicilios from "../components/tables/TableDomicilios";
+import AddUsuario from "../components/modals/AddUsuario";
 
 const Users = ({ dataCombinacion }) => {
   console.log("desde USERS:", dataCombinacion);
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
+  const [idSeleccionado, setIdSeleccionado] = useState();
+
+  const [openModalAddUser, setOpenModalAddUser] = useState(false);
 
   const handleChangeMenu = (event, newValue) => {
     newValue = !newValue;
@@ -32,6 +47,22 @@ const Users = ({ dataCombinacion }) => {
     setShowTable(0);
   };
 
+  //DIALOG ADD USER ---------
+  const handleClose = () => {
+    setOpenModalAddUser(false);
+  };
+
+  function PaperComponent(props) {
+    return (
+      <Draggable
+        handle="#draggable-dialog-title"
+        cancel={'[class*="MuiDialogContent-root"]'}
+      >
+        <Paper {...props} />
+      </Draggable>
+    );
+  }
+  //--------------------------
   return (
     <div className="ml-1 ">
       <div className="horizontalComponents">
@@ -63,32 +94,117 @@ const Users = ({ dataCombinacion }) => {
             userSel={userSel}
             setUserSel={setUserSel}
             dataCombinacion={dataCombinacion}
+            setIdSeleccionado={setIdSeleccionado}
           ></ListUsers>
         ) : null}
-        <div className="border border-primary rounded m-1">
+        <div>
           {showTable == 0 ? (
             <TableUsers
               userSel={userSel}
               setUserSel={setUserSel}
               dataCombinacion={dataCombinacion}
+              setIdSeleccionado={setIdSeleccionado}
+              setOpenModalAddUser={setOpenModalAddUser}
             ></TableUsers>
           ) : null}
-          {showTable == 1 ? <TableDirecciones></TableDirecciones> : null}
-          {showTable == 2 ? <TablePersons></TablePersons> : null}
-          {showTable == 3 ? <TableDirecciones></TableDirecciones> : null}
-          {showTable == 4 ? <TablePersons></TablePersons> : null}
-          {showTable == 5 ? <TableDirecciones></TableDirecciones> : null}
+          {showTable == 1 ? (
+            <TableEstatus
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
+            ></TableEstatus>
+          ) : null}
+          {showTable == 2 ? (
+            <TableRoles
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
+            ></TableRoles>
+          ) : null}
+          {showTable == 3 ? (
+            <TableRoles
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
+            ></TableRoles>
+          ) : null}
+          {showTable == 4 ? (
+            <TableProcesos
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
+            ></TableProcesos>
+          ) : null}
+          {showTable == 5 ? (
+            <TableTelefonos
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
+            ></TableTelefonos>
+          ) : null}
           {showTable == 6 ? (
             <TableDirecciones
-              userSel={userSel}
-              setUserSel={setUserSel}
-              dataUsers={dataUsers}
-              dataPersons={dataPersons}
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
             ></TableDirecciones>
           ) : null}
-          {/* <TableTelephones /> */}
+          {showTable == 7 ? (
+            <TableDomicilios
+              dataCombinacion={dataCombinacion}
+              idSeleccionado={idSeleccionado}
+            ></TableDomicilios>
+          ) : null}
+          {openModalAddUser == true ? <AddUsuario></AddUsuario> : null}
         </div>
       </div>
+      {/* CLICK ADD USER */}
+      <Dialog
+        open={openModalAddUser}
+        onClose={handleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+          AGREGAR NUEVO USUARIO
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="Usuario"
+            label="Usuario"
+            type="Text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            id="Nombre"
+            label="Nombre"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            id="Apellido"
+            label="Apellido"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+
+          <TextField
+            margin="dense"
+            id="correo"
+            label="E-mail"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button onClick={handleClose}>Guardar</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

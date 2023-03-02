@@ -1,5 +1,3 @@
-import TableButtons from "./TableButtons";
-
 const Telephones = () => {
   return (
     <div>

@@ -5,7 +5,7 @@ import { darken } from "@mui/material";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import ButtonGroupTable from "../ButtonGroupTable";
 
-const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
+const TableProcesos = ({ dataCombinacion, idSeleccionado }) => {
   let data = dataCombinacion[idSeleccionado].cat_usuarios_roles;
 
   //   const [isLoadData, setIsLoadData] = useState(true);
@@ -73,7 +73,7 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
         muiTableBodyProps={{
           sx: (theme) => ({
             "& tr:nth-of-type(odd)": {
-              backgroundColor: darken(theme.palette.background.default, 0),
+              backgroundColor: darken(theme.palette.background.default, 0.1),
             },
           }),
         }}
@@ -90,4 +90,4 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
   );
 };
 
-export default TableRoles;
+export default TableProcesos;

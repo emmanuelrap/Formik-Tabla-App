@@ -52,7 +52,7 @@ const ListUsers = ({ userSel, setUserSel, dataCombinacion }) => {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          maxHeight: 450,
+          maxHeight: 430,
         }}
       >
         <div className="text-center font-weight-bold">
@@ -63,7 +63,7 @@ const ListUsers = ({ userSel, setUserSel, dataCombinacion }) => {
           {dataCombinacion.map((user, index) => (
             <ListItemButton
               selected={selectedIndex === index}
-              // index={dataCombinacion.IdPersonaOK}
+              key={user.idConsecutivo}
               onClick={(event) =>
                 handleListItemClick(event, index, user.Usuario)
               }

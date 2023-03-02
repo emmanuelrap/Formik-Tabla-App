@@ -5,8 +5,8 @@ import { darken } from "@mui/material";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import ButtonGroupTable from "../ButtonGroupTable";
 
-const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
-  let data = dataCombinacion[idSeleccionado].cat_usuarios_roles;
+const TableDomicilios = ({ dataCombinacion, idSeleccionado }) => {
+  let data = dataCombinacion[idSeleccionado].cat_personas_domicilios;
 
   //   const [isLoadData, setIsLoadData] = useState(true);
   //   let data;
@@ -21,33 +21,35 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
     //column definitions...
     () => [
       {
-        accessorKey: "IdInstitutoOK",
-        header: "IdInstitutoOK",
-        size: 50, //small column
-      },
-      {
-        accessorKey: "IdNegocioOK",
-        header: "IdNegocioOK",
-        size: 50, //small column
-      },
-      {
-        accessorKey: "IdRolOK",
-        header: "IdNegocioOK",
-        size: 50, //small column
-      },
-      {
-        accessorKey: "Principal",
-        header: "Principal",
-        size: 50, //small column
-      },
-      {
-        accessorKey: "detail_row.FechaReg",
-        header: "Fecha de Registro",
+        accessorKey: "CalleNumero",
+        header: "Calle y Número",
         size: 100, //small column
       },
       {
-        accessorKey: "detail_row.UsuarioReg",
-        header: "Usuario Reg",
+        accessorKey: "Colonia",
+        header: "Colonia",
+        size: 50, //small column
+      },
+      {
+        accessorKey: "EntreCalle1",
+        header: "Entre Calle 1",
+        size: 50, //small column
+      },
+      {
+        accessorKey: "EntreCalle2",
+        header: "Entre Calle 2",
+        size: 50, //small column
+      },
+      {
+        accessorKey: "Estado",
+        header: "Estado",
+        size: 50, //small column
+      },
+
+      {
+        accessorKey: "Principal",
+        header: "¿Principal?",
+        size: 50, //small column
       },
     ],
     []
@@ -90,4 +92,4 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
   );
 };
 
-export default TableRoles;
+export default TableDomicilios;

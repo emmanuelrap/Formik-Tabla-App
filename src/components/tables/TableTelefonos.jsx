@@ -5,8 +5,8 @@ import { darken } from "@mui/material";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import ButtonGroupTable from "../ButtonGroupTable";
 
-const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
-  let data = dataCombinacion[idSeleccionado].cat_usuarios_roles;
+const TableTelefonos = ({ dataCombinacion, idSeleccionado }) => {
+  let data = dataCombinacion[idSeleccionado].cat_personas_telefonos;
 
   //   const [isLoadData, setIsLoadData] = useState(true);
   //   let data;
@@ -21,33 +21,24 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
     //column definitions...
     () => [
       {
-        accessorKey: "IdInstitutoOK",
-        header: "IdInstitutoOK",
+        accessorKey: "CodPais",
+        header: "CodPais",
         size: 50, //small column
       },
       {
-        accessorKey: "IdNegocioOK",
-        header: "IdNegocioOK",
+        accessorKey: "NumTelefono",
+        header: "Telefono",
         size: 50, //small column
       },
       {
-        accessorKey: "IdRolOK",
-        header: "IdNegocioOK",
+        accessorKey: "TipoTelefono",
+        header: "TipoTelefono",
         size: 50, //small column
       },
       {
         accessorKey: "Principal",
-        header: "Principal",
+        header: "¿Principal?",
         size: 50, //small column
-      },
-      {
-        accessorKey: "detail_row.FechaReg",
-        header: "Fecha de Registro",
-        size: 100, //small column
-      },
-      {
-        accessorKey: "detail_row.UsuarioReg",
-        header: "Usuario Reg",
       },
     ],
     []
@@ -59,11 +50,11 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
         columns={columns}
         data={data}
         // state={{ isLoading: isLoadData }}
-        initialState={{ density: "compact", showGlobalFilter: true }}
         enableColumnActions={false}
         localization={MRT_Localization_ES}
         enableStickyHeader
         enableStickyFooter
+        initialState={{ density: "compact", showGlobalFilter: true }}
         muiTableContainerProps={{
           sx: { maxHeight: "300px", minHeight: "300px", minWidth: "1000px" },
         }}
@@ -90,4 +81,4 @@ const TableRoles = ({ dataCombinacion, idSeleccionado }) => {
   );
 };
 
-export default TableRoles;
+export default TableTelefonos;
