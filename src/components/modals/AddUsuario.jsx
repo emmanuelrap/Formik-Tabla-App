@@ -54,7 +54,6 @@ function PaperComponent(props) {
 }
 const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
   const [formData, setFormData] = useState({
-    IdCEDI: "",
     IdCliente: "",
     IdNombre: "",
     IdApPaterno: "",
@@ -62,16 +61,18 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
     Usuario: "",
     Telefono: "",
     Sexo: "",
-    DesDirWeb: "Personal",
+    DesDirWeb: "",
+    DireccionWeb: "",
     CalleNumero: "",
 
-    Password: "",
-    Password2: "",
-    Alias: "",
+    IdCEDI: "1011",
 
+    Alias: "",
     Colonia: "",
     Estado: "",
     Municipio: "",
+    Password: "",
+    Password2: "",
     TipoPersona: "",
     FechaNacimiento: "",
     Curp: "",
@@ -92,6 +93,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
     IdApMaterno,
     Alias,
     DesDirWeb,
+    DireccionWeb,
     CalleNumero,
     Colonia,
     Estado,
@@ -122,7 +124,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [hiddenInput, setHiddenInput] = useState(false);
+  const [hiddenInput, setHiddenInput] = useState(true);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleClose = () => {
@@ -130,21 +132,44 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
   };
 
   const handleGuardar = async () => {
-    // delete formData.Password2;
+    //Agregar nuevo usuario
+    if (hiddenInput) {
+      //Tratamiento a los ubjetos antes de hacer los POST
+      var dataUser = {
+        IdCliente: formData.IdCliente,
+        IdCEDI: formData.IdCEDI,
+        // Usuario: formData.Usuario,
+      };
 
-    let dataArregloPersons = [];
-    dataArregloPersons.push(formData);
+      delete formData.Password2;
+      delete formData.Alias;
+      delete formData.Colonia;
+      delete formData.Estado;
+      delete formData.Municipio;
+      delete formData.Password;
+      delete formData.Password2;
+      delete formData.TipoPersona;
+      delete formData.FechaNacimiento;
+      delete formData.Curp;
+      delete formData.Rfc;
+      delete formData.Expira;
 
-    console.log(">> OBJECTO CREADO: ", dataArregloPersons);
-    let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
-    let URL1 = URL + "/persons/many";
-    await axios.post(URL1, dataArreglo);
+      let dataArregloPersons = [];
+      dataArregloPersons.push(formData);
+      // let dataArregloUsers = [];
+      // dataArregloUsers.push(dataUser);
 
-    let dataUser = { IdCliente: formData.IdCliente, IdCEDI: 1101 };
-    let URL2 = URL + "/users/many";
-    await axios.post(URL2, postUsers);
+      console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
+      let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
+      let URL1 = URL + "/persons/many";
+      await axios.post(URL1, dataArregloPersons);
 
-    setOpenModalAddUser(false);
+      console.log(">> OBJECTO USER CREADO: ", dataUser);
+      let URL2 = URL + "/users/many";
+      await axios.post(URL2, dataUser);
+
+      setOpenModalAddUser(false);
+    }
   };
 
   return (
