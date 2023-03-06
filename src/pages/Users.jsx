@@ -20,13 +20,13 @@ import TableDomicilios from "../components/tables/TableDomicilios";
 import AddUsuario from "../components/modals/AddUsuario";
 
 const Users = ({ dataCombinacion }) => {
-  console.log("desde USERS:", dataCombinacion);
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
   const [idSeleccionado, setIdSeleccionado] = useState();
 
   const [openModalAddUser, setOpenModalAddUser] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const handleChangeMenu = (event, newValue) => {
     newValue = !newValue;
@@ -38,9 +38,6 @@ const Users = ({ dataCombinacion }) => {
     setShowTable(0);
   };
 
-  //DIALOG ADD USER ---------
-
-  //--------------------------
   return (
     <div className="ml-1 ">
       {/* BARRA DE PESTAÑAS */}
@@ -87,6 +84,7 @@ const Users = ({ dataCombinacion }) => {
               dataCombinacion={dataCombinacion}
               setIdSeleccionado={setIdSeleccionado}
               setOpenModalAddUser={setOpenModalAddUser}
+              setIsUpdate={setIsUpdate}
             ></TableUsers>
           ) : null}
           {showTable == 1 ? (
@@ -144,6 +142,18 @@ const Users = ({ dataCombinacion }) => {
             <AddUsuario
               openModalAddUser={openModalAddUser}
               setOpenModalAddUser={setOpenModalAddUser}
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+            ></AddUsuario>
+          ) : null}
+
+          {/* CLICK en el boton de Modificar Usuario */}
+          {isUpdate == true ? (
+            <AddUsuario
+              openModalAddUser={openModalAddUser}
+              setOpenModalAddUser={setOpenModalAddUser}
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
             ></AddUsuario>
           ) : null}
         </div>

@@ -12,14 +12,41 @@ import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import AddUsuario from "./modals/AddUsuario";
 
-const ButtonGroupTableUser = ({ userSel, setOpenModalAddUser }) => {
+const ButtonGroupTableUser = ({
+  userSel,
+  setOpenModalAddUser,
+  setIsUpdate,
+}) => {
   const [alignment, setAlignment] = useState();
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
+
   const handleClickAddUser = (event) => {
     setOpenModalAddUser(true);
+    setIsUpdate(false);
+  };
+  const handleClickUpdateUser = (event) => {
+    console.log("click en update");
+    setOpenModalAddUser(true);
+    setIsUpdate(true);
+  };
+
+  const handleClickDetailsUser = (event) => {
+    console.log("click en Detalles de Usuario");
+  };
+  const handleClickDeleteUser = (event) => {
+    console.log("click en eliminar Usuario");
+  };
+  const handleClickSignUser = (event) => {
+    console.log("click en  Firma");
+  };
+  const handleClickImageUser = (event) => {
+    console.log("click en Cambiar Imagen");
+  };
+  const handleClickPassordUser = (event) => {
+    console.log("click en Password");
   };
 
   return (
@@ -153,21 +180,21 @@ const ButtonGroupTableUser = ({ userSel, setOpenModalAddUser }) => {
           >
             <Tooltip title="Detalles">
               <span>
-                <IconButton disabled={false}>
+                <IconButton disabled={false} onClick={handleClickDetailsUser}>
                   <InfoIcon />
                 </IconButton>
               </span>
             </Tooltip>
             <Tooltip title="Editar">
               <span>
-                <IconButton disabled={false}>
+                <IconButton disabled={false} onClick={handleClickUpdateUser}>
                   <EditIcon />
                 </IconButton>
               </span>
             </Tooltip>
             <Tooltip title="Eliminar">
               <span>
-                <IconButton disabled={false}>
+                <IconButton disabled={false} onClick={handleClickDeleteUser}>
                   <DeleteIcon />
                 </IconButton>
               </span>
@@ -193,21 +220,21 @@ const ButtonGroupTableUser = ({ userSel, setOpenModalAddUser }) => {
           >
             <Tooltip title="Firmar">
               <span>
-                <IconButton disabled={false}>
+                <IconButton disabled={false} onClick={handleClickSignUser}>
                   <AssignmentIcon />
                 </IconButton>
               </span>
             </Tooltip>
             <Tooltip title="Cambiar Imagen">
               <span>
-                <IconButton disabled={false}>
+                <IconButton disabled={false} onClick={handleClickImageUser}>
                   <AccountBoxIcon />
                 </IconButton>
               </span>
             </Tooltip>
             <Tooltip title="Cambiar Contraseña">
               <span>
-                <IconButton disabled={false}>
+                <IconButton disabled={false} onClick={handleClickPassordUser}>
                   <LockResetIcon />
                 </IconButton>
               </span>

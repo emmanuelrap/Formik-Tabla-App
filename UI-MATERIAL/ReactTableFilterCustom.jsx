@@ -11,7 +11,6 @@ import ActionTableBar from "../src/components/bars/ActionTableBar";
 import ButtonGroupTable from "../src/components/ButtonGroupTable";
 
 const ReactTableFilterCustom = ({ dataCombinacion }) => {
-  console.log("data combinacion desde filter: ", dataCombinacion);
   const columns = useMemo(
     //column definitions...
     () => [

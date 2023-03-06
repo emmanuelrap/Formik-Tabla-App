@@ -52,7 +52,8 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
-const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
+const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
+  console.log("IsUpdate>:", isUpdate);
   const [formData, setFormData] = useState({
     IdCliente: "",
     IdNombre: "",
@@ -133,7 +134,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
 
   const handleGuardar = async () => {
     //Agregar nuevo usuario
-    if (hiddenInput) {
+    if (!isUpdate) {
       let dataArregloUser = [];
 
       let objectDataUser = {
@@ -156,12 +157,12 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
       let dataArregloPersons = [];
       dataArregloPersons.push(formData);
 
-      console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
+      // console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
       let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
       let URL1 = URL + "/persons/many";
       await axios.post(URL1, dataArregloPersons);
 
-      console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
+      // console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
       let URL2 = URL + "/users/many";
       await axios.post(URL2, dataArregloUser);
 
@@ -176,7 +177,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
       PaperComponent={PaperComponent}
       aria-labelledby="draggable-dialog-title"
     >
-      {hiddenInput ? (
+      {!isUpdate ? (
         <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
           AGREGAR NUEVO USUARIO
         </DialogTitle>
@@ -271,7 +272,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
 
           <Box
             component="form"
-            hidden={!hiddenInput}
+            hidden={isUpdate}
             sx={{
               "& > :not(style)": { my: 3 },
             }}
@@ -337,7 +338,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
 
           <div className="horizontalComponents">
             <TextField
-              hidden={hiddenInput}
+              hidden={!isUpdate}
               margin="dense"
               name="Alias"
               value={Alias}
@@ -351,7 +352,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
           </div>
           <div className="horizontalComponents">
             <TextField
-              hidden={hiddenInput}
+              hidden={!isUpdate}
               margin="dense"
               name="Rfc"
               value={Rfc}
@@ -363,7 +364,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
               sx={{ mx: 2, width: "28ch" }}
             />
             <TextField
-              hidden={hiddenInput}
+              hidden={!isUpdate}
               margin="dense"
               name="Curp"
               value={Curp}
@@ -374,23 +375,10 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
               variant="outlined"
               sx={{ mx: 2, width: "27ch" }}
             />
-
-            {/* <TextField
-              hidden={hiddenInput}
-              margin="dense"
-              name="FechaNacimiento"
-              value={FechaNacimiento}
-              onChange={handleOnChange}
-              label="Fecha de Nacimiento"
-              type="text"
-              fullWidth
-              variant="outlined"
-              sx={{ mx: 2, width: "28ch" }}
-            /> */}
           </div>
 
           <div className="horizontalComponents">
-            <Box hidden={hiddenInput} sx={{ mx: 2, width: "28ch" }}>
+            <Box hidden={!isUpdate} sx={{ mx: 2, width: "28ch" }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
                   <DatePicker label="Fecha de Nacimiento" />
@@ -399,7 +387,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
             </Box>
             <FormControl
               sx={{ m: 1, mx: 2, minWidth: "12ch" }}
-              hidden={hiddenInput}
+              hidden={!isUpdate}
             >
               <InputLabel id="demo-simple-select-helper-label-2">
                 Tipo
@@ -419,7 +407,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
 
             <FormControl
               sx={{ m: 1, mx: 1, minWidth: "12ch" }}
-              hidden={hiddenInput}
+              hidden={!isUpdate}
             >
               <InputLabel id="demo-simple-select-helper-label-3">
                 Sexo
@@ -440,7 +428,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
           <div className="horizontalComponents">
             <FormGroup>
               <FormControlLabel
-                hidden={hiddenInput}
+                hidden={!isUpdate}
                 control={<Checkbox />}
                 label="¿La contraseña Expira?"
                 sx={{ m: 1, minWidth: "28ch" }}

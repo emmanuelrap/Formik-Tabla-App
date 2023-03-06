@@ -37,7 +37,6 @@ const rows = [
 ];
 
 export default function DataGridDemo({dataUsersPersons}) {
-  console.log("DESDE FILTER",dataUsersPersons)
   return (
     <Box sx={{ height: 450, width: '100%' }}>
       <DataGrid

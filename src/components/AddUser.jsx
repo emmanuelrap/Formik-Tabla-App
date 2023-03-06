@@ -60,7 +60,7 @@ export const AddUser = () => {
         }}
         validationSchema={validate}
         onSubmit={(values) => {
-          console.log(values);
+          // console.log(values);
         }}
       >
         {(formik) => (

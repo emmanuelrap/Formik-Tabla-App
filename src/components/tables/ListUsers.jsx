@@ -16,7 +16,6 @@ const ListUsers = ({
   dataCombinacion,
   setIdSeleccionado,
 }) => {
-  console.log("desde ListUser ", dataCombinacion);
   const navigate = useNavigate();
   //users: tipo Objecto
   const [users, setUser] = useState([]);

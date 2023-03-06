@@ -7,7 +7,6 @@ export default function App() {
   const [dataCombinacion, setDataCombinacion] = useState([]);
 
   useEffect(() => {
-    console.log("useEFect");
     loadData();
   }, []);
 
@@ -22,9 +21,6 @@ export default function App() {
 
     var users = await result.data;
     var personas = await result2.data;
-
-    console.log("users ANTES:", users);
-    console.log(" personas ANTES:", personas);
 
     /////////////////////////////////////////////
 
@@ -58,7 +54,7 @@ export default function App() {
     await users.map((u, index) => {
       u.idConsecutivo = index;
     });
-    console.log("objeto Combinado con ID:", users);
+    // console.log("objeto Combinado con ID:", users);
     setDataCombinacion(users);
   };
 

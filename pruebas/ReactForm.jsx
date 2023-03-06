@@ -38,12 +38,11 @@ function ReactForm() {
   const { firstname, lastname, rol } = formData;
 
   const handleOnchange = (e) => {
-    console.log([e.target.name], e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (firstname, lastname, rol) => {
-    console.log(firstname, lastname, rol);
+    // console.log(firstname, lastname, rol);
     setLoading(true);
     alert(`datos formularios:::, ${firstname}, ${lastname}, ${rol}`);
     setTimeout(() => {

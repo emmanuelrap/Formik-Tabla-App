@@ -14,7 +14,7 @@ const TableClaves = ({
   setOpenModalAddUser,
 }) => {
   let data = dataCombinacion[idSeleccionado].cat_usuarios_estatus;
-  console.log("data combinacion desde dataCombinacion: ", dataCombinacion);
+
   //   const [isLoadData, setIsLoadData] = useState(true);
   //   let data;
 

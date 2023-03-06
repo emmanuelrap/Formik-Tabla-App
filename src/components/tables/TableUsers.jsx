@@ -17,8 +17,9 @@ const TableUsers = ({
   userSel,
   setIdSeleccionado,
   setOpenModalAddUser,
+  isUpdate,
+  setIsUpdate,
 }) => {
-  console.log("data combinacion desde dataCombinacion: ", dataCombinacion);
   const [isLoadData, setIsLoadData] = useState(true);
   let data;
 
@@ -84,6 +85,7 @@ const TableUsers = ({
           <ButtonGroupTableUser
             userSel={userSel}
             setOpenModalAddUser={setOpenModalAddUser}
+            setIsUpdate={setIsUpdate}
           />
         )}
         muiTableBodyProps={{
