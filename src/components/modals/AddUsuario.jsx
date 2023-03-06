@@ -65,7 +65,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
     DireccionWeb: "",
     CalleNumero: "",
 
-    IdCEDI: "1011",
+    IdCEDI: "1101",
 
     Alias: "",
     Colonia: "",
@@ -134,18 +134,16 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
   const handleGuardar = async () => {
     //Agregar nuevo usuario
     if (hiddenInput) {
-      //Tratamiento a los ubjetos antes de hacer los POST
-      var dataUser = {
+      let dataArregloUser = [];
+
+      let objectDataUser = {
         IdCliente: formData.IdCliente,
         IdCEDI: formData.IdCEDI,
-        // Usuario: formData.Usuario,
       };
+      dataArregloUser.push(objectDataUser);
 
       delete formData.Password2;
       delete formData.Alias;
-      delete formData.Colonia;
-      delete formData.Estado;
-      delete formData.Municipio;
       delete formData.Password;
       delete formData.Password2;
       delete formData.TipoPersona;
@@ -153,20 +151,19 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser }) => {
       delete formData.Curp;
       delete formData.Rfc;
       delete formData.Expira;
+      delete formData.IdCEDI;
 
       let dataArregloPersons = [];
       dataArregloPersons.push(formData);
-      // let dataArregloUsers = [];
-      // dataArregloUsers.push(dataUser);
 
       console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
       let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
       let URL1 = URL + "/persons/many";
       await axios.post(URL1, dataArregloPersons);
 
-      console.log(">> OBJECTO USER CREADO: ", dataUser);
+      console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
       let URL2 = URL + "/users/many";
-      await axios.post(URL2, dataUser);
+      await axios.post(URL2, dataArregloUser);
 
       setOpenModalAddUser(false);
     }
