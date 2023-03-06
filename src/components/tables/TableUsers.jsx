@@ -37,7 +37,12 @@ const TableUsers = ({
       },
       {
         accessorKey: "IdUsuarioOK",
-        header: "ID",
+        header: "IdOK",
+        size: 50, //small column
+      },
+      {
+        accessorKey: "IdUsuarioBK",
+        header: "IdBK",
         size: 50, //small column
       },
       {
@@ -63,7 +68,7 @@ const TableUsers = ({
     <Box sx={{ border: "gray 2px ", p: "0.5rem" }}>
       <MaterialReactTable
         columns={columns}
-        data={dataCombinacion} //fallback to array if data is undefined
+        data={dataCombinacion}
         state={{ isLoading: isLoadData }}
         initialState={{ density: "compact", showGlobalFilter: true }}
         enableColumnActions={false}

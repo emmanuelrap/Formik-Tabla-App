@@ -21,7 +21,10 @@ export const AddUser = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://ccnayt.dnsalias.com:9095/api/v1/users", user);
+    await axios.post(
+      "http://ccnayt.dnsalias.com:9095/api/v1/persons/many",
+      user
+    );
     navigate("/");
   };
 

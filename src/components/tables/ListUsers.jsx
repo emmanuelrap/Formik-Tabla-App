@@ -10,7 +10,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const ListUsers = ({ userSel, setUserSel, dataCombinacion }) => {
+const ListUsers = ({
+  userSel,
+  setUserSel,
+  dataCombinacion,
+  setIdSeleccionado,
+}) => {
   console.log("desde ListUser ", dataCombinacion);
   const navigate = useNavigate();
   //users: tipo Objecto
@@ -21,6 +26,7 @@ const ListUsers = ({ userSel, setUserSel, dataCombinacion }) => {
   const handleListItemClick = (event, index, nombreUsuario) => {
     setSelectedIndex(index);
     setUserSel(nombreUsuario);
+    setIdSeleccionado(index);
   };
 
   useEffect(() => {

@@ -15,6 +15,7 @@ import Telephones from "../components/Telephones";
 
 import MyAppBar from "../components/bars/MyAppBar";
 import ReactTableFilterCustom from "../../UI-MATERIAL/ReactTableFilterCustom";
+import ReactForm from "../../pruebas/ReactForm";
 
 const Navigation = ({ dataCombinacion }) => {
   console.log("desde navegation:", dataCombinacion);
@@ -35,12 +36,7 @@ const Navigation = ({ dataCombinacion }) => {
           <Route path="/telephones" element={<Telephones />} />
           <Route path="/" element={<Home />} />
 
-          <Route
-            path="/pruebas"
-            element={
-              <ReactTableFilterCustom dataCombinacion={dataCombinacion} />
-            }
-          />
+          <Route path="/pruebas" element={<ReactForm />} />
         </Routes>
       </Router>
     </div>

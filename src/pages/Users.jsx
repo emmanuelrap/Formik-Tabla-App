@@ -4,15 +4,6 @@ import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
 import ToggleButton from "@mui/material/ToggleButton";
 import { IconButton, Tooltip, TextField } from "@mui/material";
 
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Paper from "@mui/material/Paper";
-import Draggable from "react-draggable";
-
 import "../styles.css";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
 import TableUsers from "../components/tables/TableUsers";
@@ -48,23 +39,11 @@ const Users = ({ dataCombinacion }) => {
   };
 
   //DIALOG ADD USER ---------
-  const handleClose = () => {
-    setOpenModalAddUser(false);
-  };
 
-  function PaperComponent(props) {
-    return (
-      <Draggable
-        handle="#draggable-dialog-title"
-        cancel={'[class*="MuiDialogContent-root"]'}
-      >
-        <Paper {...props} />
-      </Draggable>
-    );
-  }
   //--------------------------
   return (
     <div className="ml-1 ">
+      {/* BARRA DE PESTAÑAS */}
       <div className="horizontalComponents">
         <ToggleButton value={showMenu} onChange={handleChangeMenu}>
           <ViewHeadlineIcon color="" />
@@ -88,6 +67,7 @@ const Users = ({ dataCombinacion }) => {
         </h3>
       </div>
 
+      {/* LISTA DE USUARIOS QUE SE MUESTRA O SE OCULTA */}
       <div className="horizontalComponents ml-1">
         {showMenu == true ? (
           <ListUsers
@@ -97,6 +77,8 @@ const Users = ({ dataCombinacion }) => {
             setIdSeleccionado={setIdSeleccionado}
           ></ListUsers>
         ) : null}
+
+        {/* TABLAS QUE CAMBIAN RESPECTO A LAS PESTAÑAS */}
         <div>
           {showTable == 0 ? (
             <TableUsers
@@ -156,62 +138,16 @@ const Users = ({ dataCombinacion }) => {
               setOpenModalAddUser={setOpenModalAddUser}
             ></TableDomicilios>
           ) : null}
-          {openModalAddUser == true ? <AddUsuario></AddUsuario> : null}
+
+          {/* CLICK en el boton de Agregar Usuario */}
+          {openModalAddUser == true ? (
+            <AddUsuario
+              openModalAddUser={openModalAddUser}
+              setOpenModalAddUser={setOpenModalAddUser}
+            ></AddUsuario>
+          ) : null}
         </div>
       </div>
-      {/* CLICK ADD USER */}
-      <Dialog
-        open={openModalAddUser}
-        onClose={handleClose}
-        PaperComponent={PaperComponent}
-        aria-labelledby="draggable-dialog-title"
-      >
-        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-          AGREGAR NUEVO USUARIO
-        </DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="Usuario"
-            label="Usuario"
-            type="Text"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            margin="dense"
-            id="Nombre"
-            label="Nombre"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            margin="dense"
-            id="Apellido"
-            label="Apellido"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-
-          <TextField
-            margin="dense"
-            id="correo"
-            label="E-mail"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Cancelar
-          </Button>
-          <Button onClick={handleClose}>Guardar</Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 };
