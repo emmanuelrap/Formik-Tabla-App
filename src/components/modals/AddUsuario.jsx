@@ -23,8 +23,10 @@ import {
   Box,
   Select,
   MenuItem,
+  Alert,
   Checkbox,
   FormGroup,
+  Fab,
   FormControlLabel,
 } from "@mui/material/";
 import CallIcon from "@mui/icons-material/Call";
@@ -41,6 +43,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import config from "../../../config/config";
+import ButtonInteractive from "../../../UI-MATERIAL/ButtonInteractive";
 
 function PaperComponent(props) {
   return (
@@ -53,7 +56,12 @@ function PaperComponent(props) {
   );
 }
 const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
-  console.log("IsUpdate>:", isUpdate);
+  const [showPassword, setShowPassword] = useState(false);
+  const [hiddenInput, setHiddenInput] = useState(true);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [error1, setError1] = useState("");
+  const [hayError, setHayError] = useState(false);
+
   const [formData, setFormData] = useState({
     IdCliente: "",
     IdNombre: "",
@@ -124,50 +132,48 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
     event.preventDefault();
   };
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [hiddenInput, setHiddenInput] = useState(true);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleClose = () => {
     setOpenModalAddUser(false);
   };
 
   const handleGuardar = async () => {
     //Agregar nuevo usuario
-    if (!isUpdate) {
-      let dataArregloUser = [];
+    // if (!isUpdate) {
+    //   let dataArregloUser = [];
 
-      let objectDataUser = {
-        IdCliente: formData.IdCliente,
-        IdCEDI: formData.IdCEDI,
-      };
-      dataArregloUser.push(objectDataUser);
+    //   let objectDataUser = {
+    //     IdCliente: formData.IdCliente,
+    //     IdCEDI: formData.IdCEDI,
+    //   };
+    //   dataArregloUser.push(objectDataUser);
 
-      delete formData.Password2;
-      delete formData.Alias;
-      delete formData.Password;
-      delete formData.Password2;
-      delete formData.TipoPersona;
-      delete formData.FechaNacimiento;
-      delete formData.Curp;
-      delete formData.Rfc;
-      delete formData.Expira;
-      delete formData.IdCEDI;
+    //   delete formData.Password2;
+    //   delete formData.Alias;
+    //   delete formData.Password;
+    //   delete formData.Password2;
+    //   delete formData.TipoPersona;
+    //   delete formData.FechaNacimiento;
+    //   delete formData.Curp;
+    //   delete formData.Rfc;
+    //   delete formData.Expira;
+    //   delete formData.IdCEDI;
 
-      let dataArregloPersons = [];
-      dataArregloPersons.push(formData);
+    //   let dataArregloPersons = [];
+    //   dataArregloPersons.push(formData);
 
-      // console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
-      let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
-      let URL1 = URL + "/persons/many";
-      await axios.post(URL1, dataArregloPersons);
+    //   console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
+    //   let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
+    //   let URL1 = URL + "/persons/many";
+    //   await axios.post(URL1, dataArregloPersons);
 
-      // console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
-      let URL2 = URL + "/users/many";
-      await axios.post(URL2, dataArregloUser);
+    //   console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
+    //   let URL2 = URL + "/users/many";
+    //   await axios.post(URL2, dataArregloUser);
 
-      setOpenModalAddUser(false);
-    }
+    //   setOpenModalAddUser(false);
+    // }
+    setHayError(true);
+    setError1("Este Usuario ya existe");
   };
 
   return (
@@ -187,11 +193,16 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
         </DialogTitle>
       )}
 
+      <Alert severity="error" hidden={!hayError}>
+        ¡ERROR! — Hubo un problema con la operación realizada{" "}
+      </Alert>
+
       <DialogContent dividers>
         <div className="horizontalComponents">
           <TextField
             autoFocus
-            error={false}
+            helperText={error1}
+            error={hayError}
             label="Usuario*"
             type="text"
             name="Usuario"
@@ -437,11 +448,13 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
           </div>
         </div>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ my: 2, mx: 2 }}>
         <Button autoFocus onClick={handleClose}>
           Cancelar
         </Button>
-        <Button onClick={handleGuardar}>Guardar</Button>
+        <div className="rounded-circle" onClick={handleGuardar}>
+          <ButtonInteractive hayError={hayError}></ButtonInteractive>
+        </div>
       </DialogActions>
     </Dialog>
   );

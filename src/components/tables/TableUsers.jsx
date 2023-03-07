@@ -17,7 +17,6 @@ const TableUsers = ({
   userSel,
   setIdSeleccionado,
   setOpenModalAddUser,
-  isUpdate,
   setIsUpdate,
 }) => {
   const [isLoadData, setIsLoadData] = useState(true);

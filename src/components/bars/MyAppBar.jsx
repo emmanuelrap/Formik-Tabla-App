@@ -123,7 +123,7 @@ const MyAppBar = () => {
                 <Button
                   key={page}
                   onClick={handleClickNav}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ my: 1, color: "white", display: "block" }}
                 >
                   {page}
                 </Button>
