@@ -18,7 +18,6 @@ import ReactTableFilterCustom from "../../UI-MATERIAL/ReactTableFilterCustom";
 import ReactForm from "../../pruebas/ReactForm";
 
 const Navigation = ({ dataCombinacion }) => {
-  console.log("desde navegation:", dataCombinacion);
   return (
     <div>
       <Router>

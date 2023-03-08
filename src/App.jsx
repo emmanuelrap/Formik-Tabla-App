@@ -46,7 +46,12 @@ export default function App() {
           users[index][entry] = el[entry];
         });
       } catch (e) {
-        console.log("cache un error");
+        console.log(
+          "cache un error: e.IdPersonaOK",
+          e.IdPersonaOK,
+          "el.IdPersonaOK",
+          el.IdPersonaOK
+        );
       }
     });
 
@@ -58,9 +63,5 @@ export default function App() {
     setDataCombinacion(users);
   };
 
-  return (
-    <div>
-      <Navigation dataCombinacion={dataCombinacion} />
-    </div>
-  );
+  return <Navigation dataCombinacion={dataCombinacion} />;
 }

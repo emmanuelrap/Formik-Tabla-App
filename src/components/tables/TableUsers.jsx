@@ -96,7 +96,7 @@ const TableUsers = ({
         }}
         muiTableBodyRowProps={({ row }) => ({
           onClick: (event) => {
-            console.info(event, row.id);
+            // console.info(event, row.id);
             setUserSel(dataCombinacion[row.id].Usuario);
             setIdSeleccionado(row.id);
           },

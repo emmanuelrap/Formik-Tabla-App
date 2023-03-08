@@ -8,9 +8,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
-import AddUsuario from "./modals/AddUsuario";
 
 const ButtonGroupTableUser = ({
   userSel,

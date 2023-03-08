@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import axios from "axios";
-
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-
 import "../../../src/styles.css";
+import config from "../../../config/config";
 
 import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Paper,
   Tooltip,
   TextField,
@@ -29,21 +28,17 @@ import {
   Fab,
   FormControlLabel,
 } from "@mui/material/";
-import CallIcon from "@mui/icons-material/Call";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import ButtonInteractive from "../../../UI-MATERIAL/ButtonInteractive";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
 import KeyIcon from "@mui/icons-material/Key";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import config from "../../../config/config";
-import ButtonInteractive from "../../../UI-MATERIAL/ButtonInteractive";
 
 function PaperComponent(props) {
   return (
@@ -55,12 +50,19 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
+
 const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [hiddenInput, setHiddenInput] = useState(true);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const [error1, setError1] = useState("");
   const [hayError, setHayError] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [errores, setError] = useState({
+    usuario: "",
+    idBK: "",
+    password: "",
+  });
+
+  const { usuario, IdCidBKliente, password } = errores;
+  const timer = useRef();
 
   const [formData, setFormData] = useState({
     IdCliente: "",
@@ -70,16 +72,11 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
     Usuario: "",
     Telefono: "",
     Sexo: "",
-    DesDirWeb: "",
-    DireccionWeb: "",
     CalleNumero: "",
 
     IdCEDI: "1101",
 
     Alias: "",
-    Colonia: "",
-    Estado: "",
-    Municipio: "",
     Password: "",
     Password2: "",
     TipoPersona: "",
@@ -100,14 +97,8 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
     Password,
     Password2,
     IdApMaterno,
-    Alias,
-    DesDirWeb,
-    DireccionWeb,
-    CalleNumero,
-    Colonia,
-    Estado,
-    Municipio,
 
+    Alias,
     TipoPersona,
     FechaNacimiento,
     Curp,
@@ -128,52 +119,62 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
     else setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const esFormularioCorrecto = () => {
+    setHayError(true);
+  };
+
+  const handleGuardar = () => {
+    esFormularioCorrecto();
+
+    if (hayError) {
+      console.log("no hay error");
+    } else {
+      setError({ ...errores, ["usuario"]: "usuario repetido" });
+      //No hay error, Inserta
+      console.log("  hay Error");
+      // if (!isUpdate) {
+      //   let dataArregloUser = [];
+
+      //   let objectDataUser = {
+      //     IdCliente: formData.IdCliente,
+      //     IdCEDI: formData.IdCEDI,
+      //   };
+
+      //   dataArregloUser.push(objectDataUser);
+
+      //   delete formData.Password2;
+      //   delete formData.Alias;
+      //   delete formData.Password;
+      //   delete formData.Password2;
+      //   delete formData.TipoPersona;
+      //   delete formData.FechaNacimiento;
+      //   delete formData.Curp;
+      //   delete formData.Rfc;
+      //   delete formData.Expira;
+      //   delete formData.IdCEDI;
+
+      //   let dataArregloPersons = [];
+      //   dataArregloPersons.push(formData);
+
+      //   console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
+      //   let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
+      //   let URL1 = URL + "/persons/many";
+      //   await axios.post(URL1, dataArregloPersons);
+
+      //   console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
+      //   let URL2 = URL + "/users/many";
+      //   await axios.post(URL2, dataArregloUser);
+      //   setOpenModalAddUser(false);
+      // }
+    }
+  };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   const handleClose = () => {
     setOpenModalAddUser(false);
-  };
-
-  const handleGuardar = async () => {
-    //Agregar nuevo usuario
-    // if (!isUpdate) {
-    //   let dataArregloUser = [];
-
-    //   let objectDataUser = {
-    //     IdCliente: formData.IdCliente,
-    //     IdCEDI: formData.IdCEDI,
-    //   };
-    //   dataArregloUser.push(objectDataUser);
-
-    //   delete formData.Password2;
-    //   delete formData.Alias;
-    //   delete formData.Password;
-    //   delete formData.Password2;
-    //   delete formData.TipoPersona;
-    //   delete formData.FechaNacimiento;
-    //   delete formData.Curp;
-    //   delete formData.Rfc;
-    //   delete formData.Expira;
-    //   delete formData.IdCEDI;
-
-    //   let dataArregloPersons = [];
-    //   dataArregloPersons.push(formData);
-
-    //   console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
-    //   let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
-    //   let URL1 = URL + "/persons/many";
-    //   await axios.post(URL1, dataArregloPersons);
-
-    //   console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
-    //   let URL2 = URL + "/users/many";
-    //   await axios.post(URL2, dataArregloUser);
-
-    //   setOpenModalAddUser(false);
-    // }
-    setHayError(true);
-    setError1("Este Usuario ya existe");
   };
 
   return (
@@ -201,8 +202,8 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
         <div className="horizontalComponents">
           <TextField
             autoFocus
-            helperText={error1}
-            error={hayError}
+            helperText={errores.usuario}
+            error={errores.usuario == !""}
             label="Usuario*"
             type="text"
             name="Usuario"

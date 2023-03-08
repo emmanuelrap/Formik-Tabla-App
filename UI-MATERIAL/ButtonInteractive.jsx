@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green, red } from "@mui/material/colors";
@@ -9,9 +9,9 @@ import SaveIcon from "@mui/icons-material/Save";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
 export default function ButtonInteractive({ hayError }) {
-  const [loading, setLoading] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
-  const timer = React.useRef();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const timer = useRef();
 
   const buttonSx = {
     ...//click y se insertó correctamente
@@ -25,7 +25,7 @@ export default function ButtonInteractive({ hayError }) {
       : null),
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       clearTimeout(timer.current);
     };
@@ -38,7 +38,7 @@ export default function ButtonInteractive({ hayError }) {
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
-      }, 1500);
+      }, 1000);
     }
   };
 
