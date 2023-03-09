@@ -8,7 +8,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import SaveIcon from "@mui/icons-material/Save";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
-export default function ButtonInteractive({ hayError, handleGuardar }) {
+export default function ButtonInteractive({
+  hayError,
+  handleGuardar,
+  insertSuccess,
+}) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const timer = useRef();
@@ -48,6 +52,7 @@ export default function ButtonInteractive({ hayError, handleGuardar }) {
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Box sx={{ m: 1, position: "relative" }}>
         <Fab
+          disabled={insertSuccess}
           aria-label="save"
           color="primary"
           sx={buttonSx}

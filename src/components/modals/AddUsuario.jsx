@@ -3,6 +3,8 @@ import Draggable from "react-draggable";
 import axios from "axios";
 import "../../../src/styles.css";
 import config from "../../../config/config";
+import swal from "sweetalert";
+import { sizing } from "@mui/system";
 
 import {
   Button,
@@ -60,7 +62,8 @@ const AddUsuario = ({
   const [showPassword, setShowPassword] = useState(false);
 
   const [mensajeErrorAlert, setMensajeErrorAlert] = useState("");
-  const [desabilitarBotones, setDesabilitarBotones] = useState(false);
+  const [insertSuccess, setMensajeExitoAlert] = useState(false);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const [hayErrorUsuario, setHayErrorUsuario] = useState(false);
@@ -198,8 +201,9 @@ const AddUsuario = ({
       //   await axios.post(URL2, dataArregloUser);
 
       //}
-
-      setDesabilitarBotones(true);
+      // swal("Exito!", "Usuario Agregado Correctamente", "success");
+      // setOpenModalAddUser(false);
+      setMensajeExitoAlert(true);
     }
   };
 
@@ -228,13 +232,10 @@ const AddUsuario = ({
         </DialogTitle>
       )}
 
-      <Alert severity="error" hidden={mensajeErrorAlert == ""}>
-        ¡ERROR! - {mensajeErrorAlert}
-      </Alert>
-
       <DialogContent dividers>
         <div className="horizontalComponents">
           <TextField
+            disabled={insertSuccess}
             autoFocus
             error={hayErrorUsuario}
             label="Usuario*"
@@ -262,6 +263,7 @@ const AddUsuario = ({
             name="IdCliente"
             value={IdCliente}
             onChange={handleOnChange}
+            disabled={insertSuccess}
             margin="dense"
             fullWidth
             variant="outlined"
@@ -286,6 +288,7 @@ const AddUsuario = ({
             variant="outlined"
             value={IdNombre}
             onChange={handleOnChange}
+            disabled={insertSuccess}
             sx={{ mx: 2, width: "60ch" }}
           />
 
@@ -296,6 +299,7 @@ const AddUsuario = ({
               name="IdApPaterno"
               label="Apellido Paterno*"
               value={IdApPaterno}
+              disabled={insertSuccess}
               type="text"
               fullWidth
               variant="outlined"
@@ -306,6 +310,7 @@ const AddUsuario = ({
               margin="dense"
               name="IdApMaterno"
               onChange={handleOnChange}
+              disabled={insertSuccess}
               label="Apellido Materno"
               type="text "
               fullWidth
@@ -324,7 +329,11 @@ const AddUsuario = ({
             noValidate
             autoComplete="off"
           >
-            <FormControl sx={{ mx: 1, width: "25ch" }} variant="standard">
+            <FormControl
+              sx={{ mx: 1, width: "25ch" }}
+              variant="standard"
+              disabled={insertSuccess}
+            >
               <InputLabel
                 htmlFor="standard-adornment-password"
                 sx={{ mx: 3, width: "25ch" }}
@@ -352,7 +361,11 @@ const AddUsuario = ({
               />
             </FormControl>
 
-            <FormControl sx={{ mx: 3, width: "25ch" }} variant="standard">
+            <FormControl
+              sx={{ mx: 3, width: "25ch" }}
+              variant="standard"
+              disabled={insertSuccess}
+            >
               <InputLabel
                 htmlFor="standard-adornment-password"
                 sx={{ mx: 3, width: "25ch" }}
@@ -482,12 +495,23 @@ const AddUsuario = ({
           </div>
         </div>
       </DialogContent>
-      <DialogActions sx={{ my: 1, mx: 1 }}>
+      <DialogActions sx={{ my: 1, mx: 1, width: "auto" }}>
+        <Alert severity="error" hidden={mensajeErrorAlert == ""} sx={{ mx: 5 }}>
+          ¡ERROR! — {mensajeErrorAlert}
+        </Alert>
+        <Alert
+          severity="success"
+          hidden={insertSuccess == false}
+          sx={{ mx: 5 }}
+        >
+          ¡Operacion Exitosa!
+        </Alert>
         <Fab autoFocus onClick={handleClose} color="error" sx={{ mx: 1, p: 0 }}>
           <CloseIcon></CloseIcon>
         </Fab>
 
         <ButtonInteractive
+          insertSuccess={insertSuccess}
           hayError={mensajeErrorAlert !== ""}
           handleGuardar={handleGuardar}
         ></ButtonInteractive>

@@ -17,6 +17,7 @@ npm install dayjs
 
 COMPONENTES
 npm i material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
+npm install sweetalert --save
 
 # ###### ERRORES
 
