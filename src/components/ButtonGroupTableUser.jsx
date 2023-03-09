@@ -51,7 +51,7 @@ const ButtonGroupTableUser = ({
     <div className="horizontalComponents p-1">
       <Box
         sx={{
-          m: 0.1,
+          m: 0,
           display: "flex",
           alignItems: "center",
           width: "fit-content",
@@ -77,7 +77,7 @@ const ButtonGroupTableUser = ({
         <>
           <Box
             sx={{
-              m: 0.1,
+              m: 0,
               display: "flex",
               alignItems: "center",
               width: "fit-content",
@@ -117,7 +117,7 @@ const ButtonGroupTableUser = ({
           </Box>
           <Box
             sx={{
-              m: 0.1,
+              m: 0,
               display: "flex",
               alignItems: "center",
               width: "fit-content",
@@ -160,7 +160,7 @@ const ButtonGroupTableUser = ({
         <>
           <Box
             sx={{
-              m: 0.1,
+              m: 0,
               display: "flex",
               alignItems: "center",
               width: "fit-content",
@@ -200,7 +200,7 @@ const ButtonGroupTableUser = ({
           </Box>
           <Box
             sx={{
-              m: 0.1,
+              m: 0,
               display: "flex",
               alignItems: "center",
               width: "fit-content",

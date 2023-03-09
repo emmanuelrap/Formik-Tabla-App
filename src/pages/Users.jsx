@@ -140,6 +140,7 @@ const Users = ({ dataCombinacion }) => {
           {/* CLICK en el boton de Agregar Usuario */}
           {openModalAddUser == true ? (
             <AddUsuario
+              dataCombinacion={dataCombinacion}
               openModalAddUser={openModalAddUser}
               setOpenModalAddUser={setOpenModalAddUser}
               isUpdate={isUpdate}
@@ -150,6 +151,7 @@ const Users = ({ dataCombinacion }) => {
           {/* CLICK en el boton de Modificar Usuario */}
           {isUpdate == true ? (
             <AddUsuario
+              dataCombinacion={dataCombinacion}
               openModalAddUser={openModalAddUser}
               setOpenModalAddUser={setOpenModalAddUser}
               isUpdate={isUpdate}

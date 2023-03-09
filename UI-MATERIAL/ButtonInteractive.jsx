@@ -8,13 +8,14 @@ import CheckIcon from "@mui/icons-material/Check";
 import SaveIcon from "@mui/icons-material/Save";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
-export default function ButtonInteractive({ hayError }) {
+export default function ButtonInteractive({ hayError, handleGuardar }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const timer = useRef();
 
   const buttonSx = {
     ...//click y se insertó correctamente
+
     (success && !hayError
       ? {
           bgcolor: green[500],
@@ -22,7 +23,7 @@ export default function ButtonInteractive({ hayError }) {
             bgcolor: green[500],
           },
         }
-      : null),
+      : { p: 0 }),
   };
 
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function ButtonInteractive({ hayError }) {
       setSuccess(false);
       setLoading(true);
       timer.current = window.setTimeout(() => {
+        handleGuardar();
         setSuccess(true);
         setLoading(false);
       }, 1000);
@@ -55,12 +57,12 @@ export default function ButtonInteractive({ hayError }) {
         </Fab>
         {loading && (
           <CircularProgress
-            size={68}
+            size={70}
             sx={{
               color: green[500],
               position: "absolute",
               top: -6,
-              left: -6,
+              left: -7,
               zIndex: 1,
             }}
           />

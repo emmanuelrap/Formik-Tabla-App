@@ -39,7 +39,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
+import CloseIcon from "@mui/icons-material/Close";
 function PaperComponent(props) {
   return (
     <Draggable
@@ -51,17 +51,21 @@ function PaperComponent(props) {
   );
 }
 
-const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
+const AddUsuario = ({
+  openModalAddUser,
+  setOpenModalAddUser,
+  isUpdate,
+  dataCombinacion,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [hayError, setHayError] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const [errores, setError] = useState({
-    usuario: "",
-    idBK: "",
-    password: "",
-  });
 
-  const { usuario, IdCidBKliente, password } = errores;
+  const [mensajeErrorAlert, setMensajeErrorAlert] = useState("");
+  const [desabilitarBotones, setDesabilitarBotones] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const [hayErrorUsuario, setHayErrorUsuario] = useState(false);
+  const [hayErrorId, setHayErrorId] = useState(false);
+
   const timer = useRef();
 
   const [formData, setFormData] = useState({
@@ -120,18 +124,46 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
   };
 
   const esFormularioCorrecto = () => {
-    setHayError(true);
+    //Validamos las contraseñas
+    // console.log("formDataA>>", formData.Usuario);
+    // console.log("dataCombinada>>", dataCombinacion[0].Usuario);
+
+    if (formData.Password != formData.Password2) {
+      setMensajeErrorAlert("Las contraseñas no coinciden");
+      return false;
+    }
+
+    //verificamos que el usuario no exista
+    let bandera = false;
+    dataCombinacion.map((e) => {
+      if (formData.Usuario == e.Usuario) {
+        console.log("Si encontro uno igual");
+        bandera = true;
+      }
+    });
+    if (bandera) {
+      setMensajeErrorAlert("El usuario ya existe");
+      setHayErrorUsuario(true);
+
+      bandera = false;
+      return false;
+    }
+
+    console.log("llegó al return true");
+    return true;
+
+    //verificamos que el idBK no exista
   };
 
-  const handleGuardar = () => {
-    esFormularioCorrecto();
+  const handleGuardar = async () => {
+    setHayErrorId(false);
+    setHayErrorUsuario(false);
+    setMensajeErrorAlert("");
 
-    if (hayError) {
-      console.log("no hay error");
-    } else {
-      setError({ ...errores, ["usuario"]: "usuario repetido" });
-      //No hay error, Inserta
-      console.log("  hay Error");
+    let res = esFormularioCorrecto();
+
+    if (res) {
+      console.log("no hay error en el formulario");
       // if (!isUpdate) {
       //   let dataArregloUser = [];
 
@@ -164,8 +196,10 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
       //   console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
       //   let URL2 = URL + "/users/many";
       //   await axios.post(URL2, dataArregloUser);
-      //   setOpenModalAddUser(false);
-      // }
+
+      //}
+
+      setDesabilitarBotones(true);
     }
   };
 
@@ -194,16 +228,15 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
         </DialogTitle>
       )}
 
-      <Alert severity="error" hidden={!hayError}>
-        ¡ERROR! — Hubo un problema con la operación realizada{" "}
+      <Alert severity="error" hidden={mensajeErrorAlert == ""}>
+        ¡ERROR! - {mensajeErrorAlert}
       </Alert>
 
       <DialogContent dividers>
         <div className="horizontalComponents">
           <TextField
             autoFocus
-            helperText={errores.usuario}
-            error={errores.usuario == !""}
+            error={hayErrorUsuario}
             label="Usuario*"
             type="text"
             name="Usuario"
@@ -389,7 +422,7 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
             />
           </div>
 
-          <div className="horizontalComponents">
+          <div className="horizontalComponents ">
             <Box hidden={!isUpdate} sx={{ mx: 2, width: "28ch" }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
@@ -449,13 +482,15 @@ const AddUsuario = ({ openModalAddUser, setOpenModalAddUser, isUpdate }) => {
           </div>
         </div>
       </DialogContent>
-      <DialogActions sx={{ my: 2, mx: 2 }}>
-        <Button autoFocus onClick={handleClose}>
-          Cancelar
-        </Button>
-        <div className="rounded-circle" onClick={handleGuardar}>
-          <ButtonInteractive hayError={hayError}></ButtonInteractive>
-        </div>
+      <DialogActions sx={{ my: 1, mx: 1 }}>
+        <Fab autoFocus onClick={handleClose} color="error" sx={{ mx: 1, p: 0 }}>
+          <CloseIcon></CloseIcon>
+        </Fab>
+
+        <ButtonInteractive
+          hayError={mensajeErrorAlert !== ""}
+          handleGuardar={handleGuardar}
+        ></ButtonInteractive>
       </DialogActions>
     </Dialog>
   );
