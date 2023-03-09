@@ -52,7 +52,6 @@ export default function ButtonInteractive({
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Box sx={{ m: 1, position: "relative" }}>
         <Fab
-          disabled={insertSuccess}
           aria-label="save"
           color="primary"
           sx={buttonSx}

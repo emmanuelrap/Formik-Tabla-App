@@ -14,6 +14,7 @@ npm install axios mongoose
 
 npm install @mui/x-date-pickers
 npm install dayjs
+npm i @mui/lab
 
 COMPONENTES
 npm i material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled

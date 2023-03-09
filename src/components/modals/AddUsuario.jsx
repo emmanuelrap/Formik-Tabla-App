@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
+import { insertarUsuarioPersona } from "../../helpers/insertarUsuarioPersona";
+
 import Draggable from "react-draggable";
-import axios from "axios";
+
 import "../../../src/styles.css";
-import config from "../../../config/config";
-import swal from "sweetalert";
-import { sizing } from "@mui/system";
+
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import {
   Button,
@@ -30,11 +31,12 @@ import {
   Fab,
   FormControlLabel,
 } from "@mui/material/";
-import ButtonInteractive from "../../../UI-MATERIAL/ButtonInteractive";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import Visibility from "@mui/icons-material/Visibility";
+import CheckIcon from "@mui/icons-material/Check";
+import SaveIcon from "@mui/icons-material/Save";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -62,20 +64,20 @@ const AddUsuario = ({
   const [showPassword, setShowPassword] = useState(false);
 
   const [mensajeErrorAlert, setMensajeErrorAlert] = useState("");
+  const [loading, setLoading] = useState(false);
   const [insertSuccess, setMensajeExitoAlert] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const [hayErrorUsuario, setHayErrorUsuario] = useState(false);
   const [hayErrorId, setHayErrorId] = useState(false);
 
   const timer = useRef();
 
   const [formData, setFormData] = useState({
-    IdCliente: "",
-    IdNombre: "",
-    IdApPaterno: "",
-    IdApMaterno: "",
+    IdPersonaBK: "",
+    Nombre: "",
+    ApPaterno: "",
+    ApMaterno: "",
     Usuario: "",
     Telefono: "",
     Sexo: "",
@@ -87,7 +89,7 @@ const AddUsuario = ({
     Password: "",
     Password2: "",
     TipoPersona: "",
-    FechaNacimiento: "",
+    FechaNac: "",
     Curp: "",
     Rfc: "",
     Expira: "",
@@ -95,19 +97,19 @@ const AddUsuario = ({
 
   const {
     IdCEDI,
-    IdCliente,
-    IdNombre,
+    IdPersonaBK,
+    Nombre,
     Usuario,
     Telefono,
-    IdApPaterno,
+    ApPaterno,
     Sexo,
     Password,
     Password2,
-    IdApMaterno,
+    ApMaterno,
 
     Alias,
     TipoPersona,
-    FechaNacimiento,
+    FechaNac,
     Curp,
     Rfc,
     Expira,
@@ -127,83 +129,73 @@ const AddUsuario = ({
   };
 
   const esFormularioCorrecto = () => {
+    //Verificamos campos obligatorios
+    if (
+      formData.Usuario == "" ||
+      FormData.Nombre == "" ||
+      formData.ApPaterno == "" ||
+      formData.Password == "" ||
+      formData.Password2 == ""
+    ) {
+      setMensajeErrorAlert("Llenar los campos obligatorios");
+      return false;
+    }
+
     //Validamos las contraseñas
-    // console.log("formDataA>>", formData.Usuario);
-    // console.log("dataCombinada>>", dataCombinacion[0].Usuario);
 
     if (formData.Password != formData.Password2) {
-      setMensajeErrorAlert("Las contraseñas no coinciden");
+      setMensajeErrorAlert("Contraseñas no coinciden");
       return false;
     }
 
     //verificamos que el usuario no exista
-    let bandera = false;
+    let bandera = 0;
+    console.log(dataCombinacion);
     dataCombinacion.map((e) => {
-      if (formData.Usuario == e.Usuario) {
-        console.log("Si encontro uno igual");
-        bandera = true;
+      if (
+        formData.Usuario == e.Usuario ||
+        formData.IdPersonaBK == e.IdPersonaBK
+      ) {
+        if (formData.Usuario == e.Usuario) bandera = 1;
+        if (formData.IdPersonaBK == e.IdPersonaBK) bandera = 2;
       }
     });
-    if (bandera) {
-      setMensajeErrorAlert("El usuario ya existe");
-      setHayErrorUsuario(true);
-
+    if (bandera == 1) {
       bandera = false;
+      setMensajeErrorAlert("Usuario ya existe");
       return false;
     }
 
-    console.log("llegó al return true");
+    if (bandera == 2) {
+      bandera = false;
+      setMensajeErrorAlert("ID ya existe");
+      return false;
+    }
+
     return true;
 
     //verificamos que el idBK no exista
   };
 
-  const handleGuardar = async () => {
+  const handleClickButtonGuardar = async () => {
+    setLoading(true);
+    timer.current = window.setTimeout(() => {
+      setLoading(false);
+      agregarUsuario();
+    }, 1000);
+  };
+  const agregarUsuario = async () => {
     setHayErrorId(false);
-    setHayErrorUsuario(false);
     setMensajeErrorAlert("");
 
     let res = esFormularioCorrecto();
 
     if (res) {
       console.log("no hay error en el formulario");
-      // if (!isUpdate) {
-      //   let dataArregloUser = [];
-
-      //   let objectDataUser = {
-      //     IdCliente: formData.IdCliente,
-      //     IdCEDI: formData.IdCEDI,
-      //   };
-
-      //   dataArregloUser.push(objectDataUser);
-
-      //   delete formData.Password2;
-      //   delete formData.Alias;
-      //   delete formData.Password;
-      //   delete formData.Password2;
-      //   delete formData.TipoPersona;
-      //   delete formData.FechaNacimiento;
-      //   delete formData.Curp;
-      //   delete formData.Rfc;
-      //   delete formData.Expira;
-      //   delete formData.IdCEDI;
-
-      //   let dataArregloPersons = [];
-      //   dataArregloPersons.push(formData);
-
-      //   console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
-      //   let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
-      //   let URL1 = URL + "/persons/many";
-      //   await axios.post(URL1, dataArregloPersons);
-
-      //   console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
-      //   let URL2 = URL + "/users/many";
-      //   await axios.post(URL2, dataArregloUser);
-
-      //}
-      // swal("Exito!", "Usuario Agregado Correctamente", "success");
-      // setOpenModalAddUser(false);
-      setMensajeExitoAlert(true);
+      if (!isUpdate) {
+        insertarUsuarioPersona(formData);
+        setMensajeExitoAlert(true);
+      }
     }
   };
 
@@ -237,7 +229,6 @@ const AddUsuario = ({
           <TextField
             disabled={insertSuccess}
             autoFocus
-            error={hayErrorUsuario}
             label="Usuario*"
             type="text"
             name="Usuario"
@@ -256,12 +247,11 @@ const AddUsuario = ({
             }}
           />
           <TextField
-            autoFocus
             error={false}
-            label="ID*"
+            label="ID"
             type="text"
-            name="IdCliente"
-            value={IdCliente}
+            name="IdPersonaBK"
+            value={IdPersonaBK}
             onChange={handleOnChange}
             disabled={insertSuccess}
             margin="dense"
@@ -281,12 +271,12 @@ const AddUsuario = ({
         <div className="">
           <TextField
             margin="dense"
-            name="IdNombre"
+            name="Nombre"
             label="Nombre(s)*"
             type="text"
             fullWidth
             variant="outlined"
-            value={IdNombre}
+            value={Nombre}
             onChange={handleOnChange}
             disabled={insertSuccess}
             sx={{ mx: 2, width: "60ch" }}
@@ -296,9 +286,9 @@ const AddUsuario = ({
             <TextField
               margin="dense"
               onChange={handleOnChange}
-              name="IdApPaterno"
+              name="ApPaterno"
               label="Apellido Paterno*"
-              value={IdApPaterno}
+              value={ApPaterno}
               disabled={insertSuccess}
               type="text"
               fullWidth
@@ -308,14 +298,14 @@ const AddUsuario = ({
 
             <TextField
               margin="dense"
-              name="IdApMaterno"
+              name="ApMaterno"
               onChange={handleOnChange}
               disabled={insertSuccess}
               label="Apellido Materno"
               type="text "
               fullWidth
               variant="outlined"
-              value={IdApMaterno}
+              value={ApMaterno}
               sx={{ mx: 2, width: "28ch" }}
             />
           </div>
@@ -495,26 +485,38 @@ const AddUsuario = ({
           </div>
         </div>
       </DialogContent>
-      <DialogActions sx={{ my: 1, mx: 1, width: "auto" }}>
-        <Alert severity="error" hidden={mensajeErrorAlert == ""} sx={{ mx: 5 }}>
-          ¡ERROR! — {mensajeErrorAlert}
-        </Alert>
-        <Alert
-          severity="success"
-          hidden={insertSuccess == false}
-          sx={{ mx: 5 }}
-        >
-          ¡Operacion Exitosa!
-        </Alert>
-        <Fab autoFocus onClick={handleClose} color="error" sx={{ mx: 1, p: 0 }}>
-          <CloseIcon></CloseIcon>
-        </Fab>
+      <DialogActions sx={{ width: "auto" }}>
+        <Box m="auto">
+          <Alert severity="error" hidden={mensajeErrorAlert == ""}>
+            ¡ERROR! ─ {mensajeErrorAlert}
+          </Alert>
+          <Alert severity="success" hidden={insertSuccess == false}>
+            ¡EXITO! ─ Operacion Exitosa
+          </Alert>
+        </Box>
 
-        <ButtonInteractive
-          insertSuccess={insertSuccess}
-          hayError={mensajeErrorAlert !== ""}
-          handleGuardar={handleGuardar}
-        ></ButtonInteractive>
+        <LoadingButton
+          sx={{ p: 1 }}
+          color="secondary"
+          loadingPosition="start"
+          startIcon={<CloseIcon />}
+          variant="outlined"
+          onClick={handleClose}
+        >
+          <span>Cerrar</span>
+        </LoadingButton>
+        <LoadingButton
+          sx={{ p: 1 }}
+          disabled={insertSuccess}
+          color="primary"
+          loading={loading}
+          loadingPosition="start"
+          startIcon={<SaveIcon />}
+          variant="contained"
+          onClick={handleClickButtonGuardar}
+        >
+          <span>Guardar</span>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );
