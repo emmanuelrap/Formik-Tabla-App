@@ -20,13 +20,21 @@ const TableUsers = ({
   setIsUpdate,
 }) => {
   const [isLoadData, setIsLoadData] = useState(true);
+  const [dataDable, setDataTable] = useState();
+  const [actualizar, setActualizar] = useState(false);
+
   let data;
 
   useEffect(() => {
+    console.log("ACTUALIZAR");
+  }, [actualizar]); // <- add em
+
+  useEffect(() => {
+    console.log("Me renderizé");
     setTimeout(() => {
       setIsLoadData(false);
     }, 800);
-  }, [data]); // <- add empty brackets here
+  }, [dataCombinacion]); // <- add empty brackets here
 
   const columns = useMemo(
     //column definitions...
@@ -62,7 +70,10 @@ const TableUsers = ({
     []
   );
 
-  data = dataCombinacion;
+  const clic = () => {
+    console.log("disteClic");
+    setActualizar(!actualizar);
+  };
 
   return (
     <Box sx={{ border: "gray 2px ", p: "0.5rem" }}>

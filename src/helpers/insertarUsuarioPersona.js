@@ -1,7 +1,9 @@
 import axios from "axios";
 import config from "../../config/config"
+import { combinarArregloDeObjetos } from "./combinarArreglosDeObjetos";
 
-export function insertarUsuarioPersona(formData) {
+
+export async function insertarUsuarioPersona(formData) {
     console.log(formData)
    
     if(formData.IdPersonaBK ==""){
@@ -196,8 +198,14 @@ export function insertarUsuarioPersona(formData) {
     console.log(">>>> url usuarios: ", URL2)
     axios.post(URL2, usuarioInsertar);
 
+   let ultimoUsuarioPersona =  await combinarArregloDeObjetos(usuarioInsertar,personaInsertar)
+   console.log("ultimoUsuarioPersona",ultimoUsuarioPersona)
+
 
       // swal("Exito!", "Usuario Agregado Correctamente", "success");
       // setOpenModalAddUser(false);
+
+      //Retorna este usuario y persona combinado
+      return ultimoUsuarioPersona
 }
 

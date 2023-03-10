@@ -18,7 +18,8 @@ import ReactTableFilterCustom from "../../UI-MATERIAL/ReactTableFilterCustom";
 import ReactForm from "../../pruebas/ReactForm";
 import PaginaPDF from "../../pruebas/PaginaPDF";
 
-const Navigation = ({ dataCombinacion }) => {
+const Navigation = ({ dataCombinacion, setDataCombinacion }) => {
+  console.log("dataCombinacion desde Navegation", dataCombinacion);
   return (
     <div>
       <Router>
@@ -30,7 +31,12 @@ const Navigation = ({ dataCombinacion }) => {
           <Route path="/roles" element={<Roles />} />
           <Route
             path="/users"
-            element={<Users dataCombinacion={dataCombinacion} />}
+            element={
+              <Users
+                dataCombinacion={dataCombinacion}
+                setDataCombinacion={setDataCombinacion}
+              />
+            }
           />
 
           <Route path="/telephones" element={<Telephones />} />

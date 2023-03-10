@@ -19,7 +19,7 @@ import TableTelefonos from "../components/tables/TableTelefonos";
 import TableDomicilios from "../components/tables/TableDomicilios";
 import AddUsuario from "../components/modals/AddUsuario";
 
-const Users = ({ dataCombinacion }) => {
+const Users = ({ dataCombinacion, setDataCombinacion }) => {
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
@@ -82,6 +82,7 @@ const Users = ({ dataCombinacion }) => {
               userSel={userSel}
               setUserSel={setUserSel}
               dataCombinacion={dataCombinacion}
+              setDataCombinacion={setDataCombinacion}
               setIdSeleccionado={setIdSeleccionado}
               setOpenModalAddUser={setOpenModalAddUser}
               setIsUpdate={setIsUpdate}
@@ -152,6 +153,7 @@ const Users = ({ dataCombinacion }) => {
           {isUpdate == true ? (
             <AddUsuario
               dataCombinacion={dataCombinacion}
+              setDataCombinacion={setDataCombinacion}
               openModalAddUser={openModalAddUser}
               setOpenModalAddUser={setOpenModalAddUser}
               isUpdate={isUpdate}

@@ -60,16 +60,16 @@ const AddUsuario = ({
   setOpenModalAddUser,
   isUpdate,
   dataCombinacion,
+  setDataCombinacion,
+  setDataTable,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   const [mensajeErrorAlert, setMensajeErrorAlert] = useState("");
   const [loading, setLoading] = useState(false);
   const [insertSuccess, setMensajeExitoAlert] = useState(false);
+  const [hayErrorId, setHayErrorId] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const [hayErrorId, setHayErrorId] = useState(false);
 
   const timer = useRef();
 
@@ -205,7 +205,13 @@ const AddUsuario = ({
     if (res) {
       console.log("no hay error en el formulario");
       if (!isUpdate) {
-        insertarUsuarioPersona(formData);
+        let usuarioPersonaCombinado = [];
+        usuarioPersonaCombinado = await insertarUsuarioPersona(formData);
+        let datacombinacionCopia = dataCombinacion;
+        await datacombinacionCopia.push(usuarioPersonaCombinado);
+
+        //TODO: Mandar datacombinacionCopia a setDataCombinada
+        setDataTable(datacombinacionCopia);
         setMensajeExitoAlert(true);
       }
     }
