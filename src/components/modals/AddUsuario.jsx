@@ -79,11 +79,10 @@ const AddUsuario = ({
     ApPaterno: "",
     ApMaterno: "",
     Usuario: "",
-    Telefono: "",
+    Correo: "",
+
     Sexo: "",
     CalleNumero: "",
-
-    IdCEDI: "1101",
 
     Alias: "",
     Password: "",
@@ -96,11 +95,11 @@ const AddUsuario = ({
   });
 
   const {
-    IdCEDI,
     IdPersonaBK,
     Nombre,
     Usuario,
-    Telefono,
+    Correo,
+
     ApPaterno,
     Sexo,
     Password,
@@ -132,10 +131,11 @@ const AddUsuario = ({
     //Verificamos campos obligatorios
     if (
       formData.Usuario == "" ||
-      FormData.Nombre == "" ||
+      formData.Nombre == "" ||
       formData.ApPaterno == "" ||
       formData.Password == "" ||
-      formData.Password2 == ""
+      formData.Password2 == "" ||
+      formData.Correo == ""
     ) {
       setMensajeErrorAlert("Llenar los campos obligatorios");
       return false;
@@ -149,6 +149,7 @@ const AddUsuario = ({
     }
 
     //verificamos que el usuario no exista
+
     let bandera = 0;
     console.log(dataCombinacion);
     dataCombinacion.map((e) => {
@@ -159,6 +160,11 @@ const AddUsuario = ({
         if (formData.Usuario == e.Usuario) bandera = 1;
         if (formData.IdPersonaBK == e.IdPersonaBK) bandera = 2;
       }
+      e.cat_personas_dir_webs.map((el) => {
+        if (el.DireccionWeb == formData.Correo) {
+          bandera = 3;
+        }
+      });
     });
     if (bandera == 1) {
       bandera = false;
@@ -169,6 +175,12 @@ const AddUsuario = ({
     if (bandera == 2) {
       bandera = false;
       setMensajeErrorAlert("ID ya existe");
+      return false;
+    }
+
+    if (bandera == 3) {
+      bandera = false;
+      setMensajeErrorAlert("Correo ya Existe");
       return false;
     }
 
@@ -306,6 +318,21 @@ const AddUsuario = ({
               fullWidth
               variant="outlined"
               value={ApMaterno}
+              sx={{ mx: 2, width: "28ch" }}
+            />
+          </div>
+
+          <div className="horizontalComponents">
+            <TextField
+              margin="dense"
+              onChange={handleOnChange}
+              name="Correo"
+              label="E-mail*"
+              value={Correo}
+              disabled={insertSuccess}
+              type="e-mail"
+              fullWidth
+              variant="outlined"
               sx={{ mx: 2, width: "28ch" }}
             />
           </div>

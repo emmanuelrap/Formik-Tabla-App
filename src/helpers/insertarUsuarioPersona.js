@@ -4,10 +4,19 @@ import config from "../../config/config"
 export function insertarUsuarioPersona(formData) {
     console.log(formData)
    
+    if(formData.IdPersonaBK ==""){
+        var ID_INT =0;
+        var ID_STRING="";
+    }
+    else{
+        var ID_INT = Number(formData.IdPersonaBK);
+        var ID_STRING=formData.IdPersonaBK;
+    }
+
     //Insertar Persona------------------------------
-    let personaInsertar = { "IdPersonaPK": 9999,
-    "IdPersonaOK": "9999",
-    "IdPersonaBK": "9999",
+    let personaInsertar = { "IdPersonaPK": ID_INT,
+    "IdPersonaOK": ID_STRING,
+    "IdPersonaBK": ID_STRING,
     "Nombre": formData.Nombre,
     "ApPaterno": formData.ApPaterno,
     "ApMaterno": formData.ApMaterno,
@@ -23,7 +32,7 @@ export function insertarUsuarioPersona(formData) {
     "cat_personas_dir_webs": [
     {
         "DesDirWeb": "Personal",
-        "DireccionWeb": "fibarra@ittepic.edu.mx",
+        "DireccionWeb": formData.Correo,
         "IdTipoGenDirWebOK": "4",
         "IdGenDirWebOK": "10",
         "TipoDirWeb": "CORREO",
@@ -59,11 +68,11 @@ export function insertarUsuarioPersona(formData) {
 
     //Insertar Usuario --------------------------------
     let usuarioInsertar ={
-        "IdUsuarioPK": 9999,
-        "IdUsuarioOK": "9999",
-        "IdUsuarioBK": "9999",
-        "IdPersonaPK": 9999,
-        "IdPersonaOK": "9999",
+        "IdUsuarioPK": ID_INT,
+        "IdUsuarioOK": ID_STRING,
+        "IdUsuarioBK": ID_STRING,
+        "IdPersonaPK": ID_INT,
+        "IdPersonaOK": ID_STRING,
         "IdPersonaBK": formData.IdPersonaBK,
         "Usuario": formData.Usuario,
         "Expira": "N",
@@ -72,10 +81,10 @@ export function insertarUsuarioPersona(formData) {
         "Token": "",
         "cat_usuarios_expira_claves": [
         {
-            "IdClavePK": 3,
-            "IdClaveOK": "3",
-            "IdClaveBK": "3",
-            "Clave": "$2a$10$9NHEWzy9DxQ2v6ZiTQ8uGeZgR70AdaTpCCd58cjDwXO/SqvpXHFv6",
+            "IdClavePK": 1,
+            "IdClaveOK": "1",
+            "IdClaveBK": "1",
+            "Clave": formData.Password,
             "FechaExpiraIni": "2023-01-30T00:00:00.628Z",
             "FechaExpiraFin": "2023-12-31T00:00:00.628Z",
             "Actual": "S",
@@ -188,41 +197,6 @@ export function insertarUsuarioPersona(formData) {
     axios.post(URL2, usuarioInsertar);
 
 
-
-
-    //   let dataArregloUser = [];
-
-      //   let objectDataUser = {
-      //     IdPersonaBK: formData.IdPersonaBK,
-      //     IdCEDI: formData.IdCEDI,
-      //   };
-
-      //   dataArregloUser.push(objectDataUser);
-
-      //   delete formData.Password2;
-      //   delete formData.Alias;
-      //   delete formData.Password;
-      //   delete formData.Password2;
-      //   delete formData.TipoPersona;
-      //   delete formData.FechaNacimiento;
-      //   delete formData.Curp;
-      //   delete formData.Rfc;
-      //   delete formData.Expira;
-      //   delete formData.IdCEDI;
-
-      //   let dataArregloPersons = [];
-      //   dataArregloPersons.push(formData);
-
-      //   console.log(">> OBJECTO PERSONA CREADO: ", dataArregloPersons);
-      //   let URL = `${config.VITE_APP_HOST}:${config.VITE_APP_PORT}${config.VITE_API_URL}`;
-      //   let URL1 = URL + "/persons/many";
-      //   await axios.post(URL1, dataArregloPersons);
-
-      //   console.log(">> OBJECTO USER CREADO: ", dataArregloUser);
-      //   let URL2 = URL + "/users/many";
-      //   await axios.post(URL2, dataArregloUser);
-
-      //}
       // swal("Exito!", "Usuario Agregado Correctamente", "success");
       // setOpenModalAddUser(false);
 }
