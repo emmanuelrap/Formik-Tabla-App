@@ -1,3 +1,5 @@
+import swal from "sweetalert";
+
 import React, { useState, useRef } from "react";
 import { insertarUsuarioPersona } from "../../helpers/insertarUsuarioPersona";
 
@@ -196,6 +198,7 @@ const AddUsuario = ({
       agregarUsuario();
     }, 1000);
   };
+
   const agregarUsuario = async () => {
     setHayErrorId(false);
     setMensajeErrorAlert("");
@@ -205,14 +208,19 @@ const AddUsuario = ({
     if (res) {
       console.log("no hay error en el formulario");
       if (!isUpdate) {
-        let usuarioPersonaCombinado = [];
-        usuarioPersonaCombinado = await insertarUsuarioPersona(formData);
-        let datacombinacionCopia = dataCombinacion;
-        await datacombinacionCopia.push(usuarioPersonaCombinado);
+        //TODO :falta hacer un push del usuario retornado y que se automatice solo
+        // let usuarioPersonaCombinado = [];
+        let usuarioPersonaCombinado = await insertarUsuarioPersona(formData); //si hay error retorna 0
+        if (usuarioPersonaCombinado != 0) {
+          setMensajeExitoAlert(true);
+        } else {
+          setMensajeErrorAlert("ERROR - usuario no agregado");
+        }
 
-        //TODO: Mandar datacombinacionCopia a setDataCombinada
-        setDataTable(datacombinacionCopia);
-        setMensajeExitoAlert(true);
+        // let datacombinacionCopia = dataCombinacion;
+        // await datacombinacionCopia.push(usuarioPersonaCombinado);
+
+        //setDataTable(datacombinacionCopia);
       }
     }
   };

@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { esES } from "@mui/material/locale";
 import Footer from "./components/bars/Footer";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 
 const theme = createTheme(
   {
@@ -20,8 +22,10 @@ const theme = createTheme(
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <ThemeProvider theme={theme}>
-    <App />
-    <Footer></Footer>
+    <Provider store={store}>
+      <App />
+      <Footer></Footer>
+    </Provider>
   </ThemeProvider>
   // </React.StrictMode>
 );

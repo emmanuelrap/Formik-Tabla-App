@@ -4,6 +4,9 @@ import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
 import ToggleButton from "@mui/material/ToggleButton";
 import { IconButton, Tooltip, TextField } from "@mui/material";
 
+import { setShowUsersList, editTask } from "../features/tasks/tasksSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import "../styles.css";
 import NavigationBarUsers from "../components/bars/NavigationBarUsers";
 import TableUsers from "../components/tables/TableUsers";
@@ -20,6 +23,8 @@ import TableDomicilios from "../components/tables/TableDomicilios";
 import AddUsuario from "../components/modals/AddUsuario";
 
 const Users = ({ dataCombinacion, setDataCombinacion }) => {
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.tasks);
   const [showMenu, setShowMenu] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
@@ -29,8 +34,11 @@ const Users = ({ dataCombinacion, setDataCombinacion }) => {
   const [isUpdate, setIsUpdate] = useState(false);
 
   const handleChangeMenu = (event, newValue) => {
-    newValue = !newValue;
-    setShowMenu(newValue);
+    // newValue = !newValue;
+    // setShowMenu(newValue);
+    console.log("clic boton:");
+    // dispatch(editTask());
+    dispatch(setShowUsersList());
   };
 
   const handleClickQuitarUsuario = () => {

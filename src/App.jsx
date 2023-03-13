@@ -6,7 +6,7 @@ import { getUsersPersons } from "./helpers/getUsersPersons";
 
 export default function App() {
   const [dataCombinacion, setDataCombinacion] = useState([]);
-  const [actualizarData, setActualizarData] = useState(false);
+  const [saludo, setSaludo] = useState("HOLAAA XD");
 
   useEffect(() => {
     obtenerCombinacion();
@@ -22,6 +22,8 @@ export default function App() {
       <Navigation
         dataCombinacion={dataCombinacion}
         setDataCombinacion={setDataCombinacion}
+        setSaludo={setSaludo}
+        saludo={saludo}
       />
     </>
   );

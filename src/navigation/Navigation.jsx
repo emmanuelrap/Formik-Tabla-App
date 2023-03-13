@@ -18,7 +18,14 @@ import ReactTableFilterCustom from "../../UI-MATERIAL/ReactTableFilterCustom";
 import ReactForm from "../../pruebas/ReactForm";
 import PaginaPDF from "../../pruebas/PaginaPDF";
 
-const Navigation = ({ dataCombinacion, setDataCombinacion }) => {
+const Navigation = ({
+  dataCombinacion,
+  setDataCombinacion,
+  setSaludo,
+  saludo,
+}) => {
+  // setSaludo("jeje");
+  console.log("desde navigation SALUDO: -->", saludo);
   console.log("dataCombinacion desde Navegation", dataCombinacion);
   return (
     <div>
