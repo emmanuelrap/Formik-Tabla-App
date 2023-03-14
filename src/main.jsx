@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { esES } from "@mui/material/locale";
 import Footer from "./components/bars/Footer";
-import { store } from "./app/store";
+
+import store from "./redux/store/store";
 import { Provider } from "react-redux";
 
 const theme = createTheme(

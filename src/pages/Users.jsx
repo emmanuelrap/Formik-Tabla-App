@@ -1,10 +1,10 @@
 //ZAM: PAgina principal de usuarios, tiene un toogle para activar y desactivar la lista de usuarios rapida, tiene un renderizado condicional para las tablas del <NavigationBarUsers>
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
 import ToggleButton from "@mui/material/ToggleButton";
 import { IconButton, Tooltip, TextField } from "@mui/material";
 
-import { setShowUsersList, editTask } from "../features/tasks/tasksSlice";
+//import { setShowUsersList } from "../features/tasks/tasksSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import "../styles.css";
@@ -24,8 +24,9 @@ import AddUsuario from "../components/modals/AddUsuario";
 
 const Users = ({ dataCombinacion, setDataCombinacion }) => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.tasks);
-  const [showMenu, setShowMenu] = useState(true);
+
+  //const [showUsersList, setShowListUsers] = useState(statesUsers.ShowUsersList);
+  const [showUsersList, setShowListUsers] = useState(true);
   const [showTable, setShowTable] = useState(0);
   const [userSel, setUserSel] = useState("");
   const [idSeleccionado, setIdSeleccionado] = useState();
@@ -33,13 +34,14 @@ const Users = ({ dataCombinacion, setDataCombinacion }) => {
   const [openModalAddUser, setOpenModalAddUser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
-  const handleChangeMenu = (event, newValue) => {
-    // newValue = !newValue;
-    // setShowMenu(newValue);
-    console.log("clic boton:");
-    // dispatch(editTask());
-    dispatch(setShowUsersList());
-  };
+  // useEffect(() => {
+  //   setShowListUsers(statesUsers.ShowUsersList);
+  // }, [statesUsers.ShowUsersList]);
+
+  // const handleButtonShowUsersList = () => {
+  //   dispatch(setShowUsersList());
+  //   //dispatch(getDataTable("USUARIOS_PERSONAS"));
+  // };
 
   const handleClickQuitarUsuario = () => {
     setUserSel("");
@@ -50,7 +52,11 @@ const Users = ({ dataCombinacion, setDataCombinacion }) => {
     <div className="ml-1 ">
       {/* BARRA DE PESTAÑAS */}
       <div className="horizontalComponents">
-        <ToggleButton value={showMenu} onChange={handleChangeMenu}>
+        <ToggleButton
+          // value={showUsersList}
+          // onChange={handleButtonShowUsersList}
+          value={true}
+        >
           <ViewHeadlineIcon color="" />
         </ToggleButton>
         <NavigationBarUsers
@@ -74,7 +80,7 @@ const Users = ({ dataCombinacion, setDataCombinacion }) => {
 
       {/* LISTA DE USUARIOS QUE SE MUESTRA O SE OCULTA */}
       <div className="horizontalComponents ml-1">
-        {showMenu == true ? (
+        {showUsersList == true ? (
           <ListUsers
             userSel={userSel}
             setUserSel={setUserSel}

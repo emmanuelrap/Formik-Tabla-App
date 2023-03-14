@@ -11,6 +11,9 @@ import PrintIcon from "@mui/icons-material/Print";
 import ButtonGroupTable from "../ButtonGroupTable";
 import ButtonGroupTableUser from "../ButtonGroupTableUser";
 
+//import { setShowUsersList } from "../../features/tasks/tasksSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 const TableUsers = ({
   dataCombinacion,
   setUserSel,
@@ -19,22 +22,22 @@ const TableUsers = ({
   setOpenModalAddUser,
   setIsUpdate,
 }) => {
+  const dispatch = useDispatch();
+  const statesUsers = useSelector((state) => state.statesUsers);
+
   const [isLoadData, setIsLoadData] = useState(true);
   const [dataDable, setDataTable] = useState();
   const [actualizar, setActualizar] = useState(false);
 
-  let data;
-
   useEffect(() => {
-    console.log("ACTUALIZAR");
-  }, [actualizar]); // <- add em
-
-  useEffect(() => {
-    console.log("Me renderizé");
     setTimeout(() => {
       setIsLoadData(false);
     }, 800);
   }, [dataCombinacion]); // <- add empty brackets here
+
+  const clic = () => {
+    console.log("disteClic");
+  };
 
   const columns = useMemo(
     //column definitions...
@@ -70,13 +73,9 @@ const TableUsers = ({
     []
   );
 
-  const clic = () => {
-    console.log("disteClic");
-    setActualizar(!actualizar);
-  };
-
   return (
     <Box sx={{ border: "gray 2px ", p: "0.5rem" }}>
+      <button onClick={clic}>actualizar</button>
       <MaterialReactTable
         columns={columns}
         data={dataCombinacion}

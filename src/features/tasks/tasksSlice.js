@@ -4,24 +4,21 @@ const initialState =
   {
     ShowUsersList:true,
     setErrorAddUpdate:"",
+    actualizarTablaCombinada:false,
   }
 ;
 
 const userSlice = createSlice({
-  name: "tasks",
+  name: "statesUsers",
   initialState,
   reducers: {
-    editTask: (state, action) => {
-      console.log("Desde tookekit");
-      alert("CLIC desde TOOLKIT");
-    },
     setShowUsersList: (state, action) => {
       state.ShowUsersList=!state.ShowUsersList
-      console.log(  "  state.ShowUsersList",state.ShowUsersList)
     },
+
   
   },
 });
 
-export const { editTask, setShowUsersList } = userSlice.actions;
+export const {  setShowUsersList } = userSlice.actions;
 export default userSlice.reducer;
